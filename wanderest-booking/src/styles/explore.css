@@ -1,0 +1,19 @@
+.explore-container{
+  padding: 0 120px;
+}
+.row-image{
+  display: flex;
+  column-gap: 30px;
+}
+.column-image{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+.explore-container img{
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.explore-container img:hover{
+  opacity: 0.9;
+} 
