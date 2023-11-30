@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/Dropdownitem.css'
+import './Dropdownitem.css'
 import { Link } from 'react-router-dom';
 
 function DropdownItem(props){

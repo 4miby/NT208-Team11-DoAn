@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { faPerson } from '@fortawesome/free-solid-svg-icons'
-import '../../styles/sale.css'
+import './sale.css'
 const Sale = () => {
   return (
     <div className='sale-container'>

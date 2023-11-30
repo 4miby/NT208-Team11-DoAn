@@ -1,13 +1,15 @@
 import React from 'react'
-import '../../styles/searchbar.css'
+import './searchbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBed, faCalendarDay, faCalendarDays, faPerson } from '@fortawesome/free-solid-svg-icons'
 import { DateRange } from 'react-date-range';
 import { useState } from 'react';
 import { format } from 'date-fns';
-import { da } from 'date-fns/locale';
+import { useNavigate } from 'react-router-dom';
 const Searchbar = () => {
+  const navigate = useNavigate();
   const [openDate, setopenDate] = useState(false);
+  const [destination, setDestination] = useState("");
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -36,6 +38,9 @@ const Searchbar = () => {
   {
     setOpenOptions(!openOptions);
   }
+  const handleSearch = ()=>{
+    navigate("/hotels", {state:{destination, date, options}})
+  }
   return (
     <div className='search-bar-container'>
       <h1>Đặt Phòng</h1>
@@ -46,7 +51,8 @@ const Searchbar = () => {
           <p>Địa điểm</p>
           <div className='search-item'>
             <FontAwesomeIcon icon={faBed}></FontAwesomeIcon>
-            <input type='text' placeholder='Tìm kiếm nơi muốn đến'></input>
+            <input type='text' placeholder='Tìm kiếm nơi muốn đến' 
+            onChange={e=>setDestination(e.target.value)}></input>
           </div>
         </div>
 
@@ -102,7 +108,7 @@ const Searchbar = () => {
           <div className='search-item'>
             <FontAwesomeIcon icon={faCalendarDays}></FontAwesomeIcon>
             <span onClick={handleOpenDate}
-            className='SearchText'>{`${format(date[0].startDate,"MM/dd/yyyy")} tới ${format(date[0].endDate,"MM/dd/yyyy")}` }</span>
+            className='SearchText'>{`${format(date[0].startDate,"dd/MM/yyyy")} tới ${format(date[0].endDate,"dd/MM/yyyy")}` }</span>
             {openDate &&  <DateRange
               editableDateInputs={true}
               onChange={item => setDate([item.selection])}
@@ -114,7 +120,7 @@ const Searchbar = () => {
         </div>  
       </div>
 
-      <button className='booking-button'>ĐẶT NGAY</button>
+      <button className='booking-button' onClick={handleSearch}>ĐẶT NGAY</button>
 
     </div>
   )

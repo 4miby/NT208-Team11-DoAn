@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import '../../styles/navbar.css'
+import './navbar.css'
 import logo from '../../Resources/icons/hotel.png'
 import { Link } from 'react-router-dom'
 import user from '../../Resources/icons/user.png'
 import logout from '../../Resources/icons/log-out.png'
 import question from '../../Resources/icons/question.png'
-import DropDownItem from './Dropdownitem.js'
+import DropDownItem from './Dropdownitem'
 const Navbar = () => {
   const [isDrop,setIsDrop]= useState(false);
   const onclickHandle = ()=>
@@ -49,8 +49,8 @@ const Navbar = () => {
       <p onClick={ServiceClick}>Dịch Vụ</p>
       <button onClick={onclickHandle}>Tài khoản</button>
       {<div className={`DropDownMenu ${isDrop ? 'active' :'inactive'}`}>
-      <DropDownItem text="Thông tin" img={user} path="infor"></DropDownItem>
-      <DropDownItem text="Về chúng tôi" img={question} path="AboutUs"></DropDownItem>
+      <DropDownItem text="Thông tin" img={user} path="/infor"></DropDownItem>
+      <DropDownItem text="Về chúng tôi" img={question} path="/AboutUs"></DropDownItem>
       <DropDownItem text="Đăng xuất" img={logout}></DropDownItem>
       </div>}
       

@@ -1,20 +1,24 @@
 import React from 'react'
 import BackgrounSlider from './BackgrounSlider'
-import '../../styles/home.css'
+import './home.css'
 import Searchbar from './Searchbar'
 import Explore from './Explore'
 import Sale from './Sale'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 const Home = () => {
   return (
     <div className='home-page'>
+      <Navbar/>
       <div className='background-slide'>
-          <BackgrounSlider></BackgrounSlider>
+          <BackgrounSlider/>
       </div>
-      <Searchbar></Searchbar>
-      <Explore></Explore>
-      <Sale></Sale>
+      <Searchbar/>
+      <Explore/>
+      <Sale/>
+      <Footer></Footer>
     </div>
-
+    
   )
 }
 

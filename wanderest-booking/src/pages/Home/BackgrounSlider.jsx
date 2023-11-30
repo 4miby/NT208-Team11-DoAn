@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react'
-import '../../styles/backgroundslide.css'
+import './backgroundslide.css'
 const BackgrounSlider = () => {
   const imageSlide = ['https://images.pexels.com/photos/237272/pexels-photo-237272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
   'https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
