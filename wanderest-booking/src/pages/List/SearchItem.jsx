@@ -3,7 +3,7 @@ import './SearchItem.css'
 const SearchItem = () => {
   return (
     <div className='Search-Item'>
-      <img src="https://cf.bstatic.com/xdata/images/hotel/square600/488464820.webp?k=f1d9cbce3641563ab982f07a3cdeef7079d883f91c36a2176ba7342435b22bcb&o=" 
+      <img src="https://cf.bstatic.com/xdata/images/hotel/square600/495325827.webp?k=ec0bc429f43ea30373087bbcc6c46c1490536eca27ff3d67f5bc994c09b5b5b7&o=" 
       alt=""
       className='siImg'
       />

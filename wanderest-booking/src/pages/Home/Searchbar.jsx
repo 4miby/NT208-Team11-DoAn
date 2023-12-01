@@ -1,7 +1,7 @@
 import React from 'react'
 import './searchbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBed, faCalendarDay, faCalendarDays, faPerson } from '@fortawesome/free-solid-svg-icons'
+import { faBed, faCalendarDays, faPerson } from '@fortawesome/free-solid-svg-icons'
 import { DateRange } from 'react-date-range';
 import { useState } from 'react';
 import { format } from 'date-fns';
