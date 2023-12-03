@@ -67,3 +67,4 @@ export const countbyCity = async(req,res,next)=>{
     next(err);
   }
 }
+

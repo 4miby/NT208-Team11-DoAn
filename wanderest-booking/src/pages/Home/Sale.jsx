@@ -1,52 +1,40 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { faPerson } from '@fortawesome/free-solid-svg-icons'
+import { faLocationDot} from '@fortawesome/free-solid-svg-icons'
 import './sale.css'
+import useFetch from "../../hooks/useFetch"
 const Sale = () => {
+  const {data,loading,error} = useFetch("/hotels?featured=true&limit=3");
   return (
     <div className='sale-container'>
-      <h1></h1>
-      <p></p>
+      <h1>Các nhà ở được yêu thích</h1>
+      <p className='sale-description'>Các nhà ở được khách hàng yêu mến và đặt trọn niềm tin</p>
       <div className='sale-room-container'>
-        <div className='sale-room'>
-          <img alt="" src=''></img>
-          <div className='room-info'>
-            <h4>Khách sạn ABC</h4>
-            <div className='person'>
-            <p>4</p>
-            <FontAwesomeIcon icon={faPerson} className='icon'></FontAwesomeIcon>
+      {loading ? ("Loading"): 
+      (<>{data.map(item=>(
+            <div className='sale-room' key={item._id}>
+            <img alt="" src={item.photos[0]}></img>
+            <div className='room-info'>
+              <div className='roomTitleContainer'>
+                <p className='typeTitle'>{item.type}</p>
+                <h2>{item.name}</h2>
+              </div>
+
+                { item.rating && <button className='rating'>8.5</button>}
             </div>
-          </div>
-          <p>Tìm ưu đãi khách sạn tuyệt vời cho đêm nay hoặc chuyến đi sắp tới</p>
-          <p className='money'>VND 635.000 / Đêm</p>
-          <p className='sale'>Ưu đãi 10 %</p>
-        </div>
-        <div className='sale-room'>
-          <img alt="" src=''></img>
-          <div className='room-info'>
-            <h4>Khách sạn ABC</h4>
-            <div className='person'>
-              <p>4</p>
-              <FontAwesomeIcon icon={faPerson} className='icon'></FontAwesomeIcon>
+
+            <div className='address-container'>
+            <FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon>
+            <p>{item.address}, {item.city}</p>
             </div>
-          </div>
-          <p>Tìm resort tại các điểm đến được ưa chuộng cho chuyến đi du lịch của bạn</p>
-          <p className='money'>VND1.341.000/ Đêm</p>
-          <p className='sale'>Ưu đãi 10 %</p>
+            <p>{item.title}</p>
+            <p className='price'>VNĐ {item.cheapestPrice} / Đêm</p>
+            <p className='sale'></p>
         </div>
-        <div className='sale-room'>
-          <img alt="" src=''></img>
-          <div className='room-info'>
-            <h4>Khách sạn ABC</h4>
-            <div className='person'>
-              <p>4</p>
-              <FontAwesomeIcon icon={faPerson} className='icon'></FontAwesomeIcon>
-            </div>
-          </div>
-          <p>Trải nghiệm phong cảnh và dịnh vụ khó quên tại những villa tốt nhất cả nước.</p>
-          <p className='money'>VND2.342.000/ Đêm</p>
-          <p className='sale'>Ưu đãi 10 %</p>
-        </div>
+      ))} 
+      </>)}
+        
+        
       </div>
     </div>
   )
