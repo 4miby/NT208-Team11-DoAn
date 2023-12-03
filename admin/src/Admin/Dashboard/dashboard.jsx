@@ -5,7 +5,7 @@ import Navbar from "../Navbar/navbar";
 import Widget from "../Widgets/widgets";
 import Chart from "../Chart/chart";
 import Featured from "../Featured/featured";
-import List from "../Table/table";
+import Tables from "../Table/table";
 
 const Dashboard = () => {
     return (
@@ -25,7 +25,7 @@ const Dashboard = () => {
         </div>
         <div className="listContainer">
           <div className="listTitle">Latest Transactions</div>
-          <List/>
+          <Tables/>
         </div>
         </div>
       </div>
