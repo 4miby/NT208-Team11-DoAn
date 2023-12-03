@@ -10,7 +10,7 @@ const BackgrounSlider = () => {
   const [currentState, setCurrentState] = useState(0);
   useEffect(()=>
   {
-    const timer = setTimeout(()=>
+    setTimeout(()=>
     {
       if(currentState===2)
       {
@@ -20,13 +20,15 @@ const BackgrounSlider = () => {
       {
         setCurrentState(currentState+1);
       }
-    },5000)
+    },5000);
   })
+
   const bgImagestyle = {
     backgroundImage:`url(${imageSlide[currentState]})`,
     backgroundSize:'cover',
     height: '100vh',
   }
+  
   const gotoNext= (currentState)=>
   {
     setCurrentState(currentState);

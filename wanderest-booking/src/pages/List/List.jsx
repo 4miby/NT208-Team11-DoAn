@@ -23,7 +23,7 @@ const List = () => {
               <input type="text" placeholder={destination}/>
             </div>
             <div className='lsItem'>
-              <label>Địa điểm</label>
+              <label>Ngày đặt phòng</label>
               <span onClick={()=>setOpenDate(!openDate)}>
                 {`${format(date[0].startDate,"dd/MM/yyyy")} tới ${format(date[0].endDate,"dd/MM/yyyy")}`}
               </span>

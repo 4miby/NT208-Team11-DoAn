@@ -9,8 +9,8 @@ router.put("/:id",verifyAdmin,updateRoom);
 // DELETE
 router.delete("/:id/:hotelId",verifyAdmin, deleteRoom);
 // GET
-router.get("/:id",verifyAdmin, getRoom);
+router.get("/:id", getRoom);
 // GETALL
-router.get("/",verifyAdmin, getAllRooms);
+router.get("/", getAllRooms);
 
 export default router;

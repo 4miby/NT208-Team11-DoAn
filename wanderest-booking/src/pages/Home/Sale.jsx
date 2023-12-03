@@ -5,11 +5,11 @@ import './sale.css'
 const Sale = () => {
   return (
     <div className='sale-container'>
-      <h1>Ưu đãi nổi bật trong tháng</h1>
-      <p>Khuyến mãi, giảm giá và ưu đãi đặc biệt dành riêng cho bạn</p>
+      <h1></h1>
+      <p></p>
       <div className='sale-room-container'>
         <div className='sale-room'>
-          <img src=''></img>
+          <img alt="" src=''></img>
           <div className='room-info'>
             <h4>Khách sạn ABC</h4>
             <div className='person'>
@@ -22,7 +22,7 @@ const Sale = () => {
           <p className='sale'>Ưu đãi 10 %</p>
         </div>
         <div className='sale-room'>
-          <img src=''></img>
+          <img alt="" src=''></img>
           <div className='room-info'>
             <h4>Khách sạn ABC</h4>
             <div className='person'>
@@ -35,7 +35,7 @@ const Sale = () => {
           <p className='sale'>Ưu đãi 10 %</p>
         </div>
         <div className='sale-room'>
-          <img src=''></img>
+          <img alt="" src=''></img>
           <div className='room-info'>
             <h4>Khách sạn ABC</h4>
             <div className='person'>

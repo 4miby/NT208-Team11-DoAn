@@ -5,9 +5,14 @@ import { Link } from 'react-router-dom'
 import user from '../../Resources/icons/user.png'
 import logout from '../../Resources/icons/log-out.png'
 import question from '../../Resources/icons/question.png'
+import reserve from "../../Resources/icons/reserve.png"
 import DropDownItem from './Dropdownitem'
 const Navbar = () => {
+  const [isLogin,setisLogin] = useState(false);
   const [isDrop,setIsDrop]= useState(false);
+  const handleLogin = ()=>{
+    setisLogin(true);
+  }
   const onclickHandle = ()=>
   {
     setIsDrop(!isDrop);
@@ -39,6 +44,7 @@ const Navbar = () => {
       }
     )
   }
+  
   return (
     <div className='navbar'>
       <img src={logo}></img>
@@ -47,12 +53,15 @@ const Navbar = () => {
       <h1>WandeRest</h1>
       <p onClick={RoomClick}>Phòng</p>
       <p onClick={ServiceClick}>Dịch Vụ</p>
-      <button onClick={onclickHandle}>Tài khoản</button>
+      {!isLogin &&<button onClick={handleLogin}>Đăng nhập</button>}
+      {isLogin && <button onClick={onclickHandle}>Tài khoản</button>}
       {<div className={`DropDownMenu ${isDrop ? 'active' :'inactive'}`}>
       <DropDownItem text="Thông tin" img={user} path="/infor"></DropDownItem>
+      <DropDownItem text="Đặt chỗ" img={reserve} path="/AboutUs"></DropDownItem>
       <DropDownItem text="Về chúng tôi" img={question} path="/AboutUs"></DropDownItem>
       <DropDownItem text="Đăng xuất" img={logout}></DropDownItem>
       </div>}
+
       
     </div>
   )
