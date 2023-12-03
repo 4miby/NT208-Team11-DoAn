@@ -19,33 +19,33 @@ const Sidebar = () => {
                 <p className="title">MAIN</p>
                 <li>
                     <DashboardIcon className="icon"/>
-                    <span className="features">Dashboard</span>
+                    <span>Dashboard</span>
                 </li>
                 <p className="title">LISTS</p>
                 <li>
                     <PersonOutlineOutlinedIcon className="icon"/>
-                    <span className="features">Users</span>
+                    <span>Users</span>
                 </li>
                 <li>
                     <SensorDoorOutlinedIcon className="icon"/>
-                    <span className="features">Rooms</span>
+                    <span>Rooms</span>
                 </li>
                 <li>
                     <PollOutlinedIcon className="icon"/>
-                    <span className="features">Stats</span>
+                    <span>Stats</span>
                 </li>
                 <li>
                     <NotificationsNoneOutlinedIcon className="icon"/>
-                    <span className="features">Notifications</span>
+                    <span>Notifications</span>
                 </li>
                 <p className="title">USER</p>
                 <li>
                     <AccountCircleIcon className="icon"/>
-                    <span className="features">Profile</span>
+                    <span>Profile</span>
                 </li>
                 <li>
                     <ExitToAppIcon className="icon"/>
-                    <span className="features">Logout</span>
+                    <span>Logout</span>
                 </li>
             </ul>
         </div>
