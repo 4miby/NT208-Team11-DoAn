@@ -2,15 +2,25 @@ import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import './List.css'
 import { useLocation } from 'react-router-dom'
-import { format } from 'date-fns'
+import { format} from 'date-fns'
 import { DateRange } from 'react-date-range'
 import SearchItem from './SearchItem'
+import useFetch from '../../hooks/useFetch'
 const List = () => {
   const location = useLocation();
   const [destination,setDestination] = useState(location.state.destination);
   const [date,setDate] = useState(location.state.date);
   const [options,setOptions] = useState(location.state.options);
   const [openDate, setOpenDate] = useState(false);
+  const [min, setMin] = useState(undefined);
+  const [max, setMax] = useState(undefined);
+  // Fetch Data
+  const {data,loading, error,reFetch} = useFetch(`/hotels?city=${destination}&min=${min||0 }&max=${max || 10000000}`);
+  //Xử lý nút tìm kiếm
+  const handleClick = ()=>{
+    reFetch();
+  }
+
   return (
     <div>
       <Navbar/>
@@ -39,11 +49,11 @@ const List = () => {
               <div className='lsOptions'>
                 <div className='lsOptionItem'>
                   <span className='lsOptionText'>Giá thấp nhất<small> /Đêm</small></span>
-                  <input type='number' className='lsOptionInput'/>
+                  <input type='number' onChange={e=>setMin(e.target.value)} className='lsOptionInput'/>
                 </div>
                 <div className='lsOptionItem'>
                   <span className='lsOptionText'>Giá cao nhất<small> /Đêm</small></span>
-                  <input type='number' className='lsOptionInput'/>
+                  <input type='number' onChange={e=>setMax(e.target.value)} className='lsOptionInput'/>
                 </div>
                 <div className='lsOptionItem'>
                   <span className='lsOptionText'>Người lớn</span>
@@ -59,17 +69,13 @@ const List = () => {
                 </div>
               </div>
           </div>
-          <button>Search</button>
+          <button onClick={handleClick}>Search</button>
           </div>
           <div className='listResult'>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
+            {loading ? "Loading" :<>{data.map(item=>(
+                   <SearchItem item={item} key={item._id}/>
+            ))}
+            </>}
           </div>
         </div>
       </div>

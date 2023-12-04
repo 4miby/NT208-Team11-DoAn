@@ -19,8 +19,7 @@ const Sale = () => {
                 <p className='typeTitle'>{item.type}</p>
                 <h2>{item.name}</h2>
               </div>
-
-                { item.rating && <button className='rating'>8.5</button>}
+                { item.rating && <button className='rating'>{item.rating}</button>}
             </div>
 
             <div className='address-container'>

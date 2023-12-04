@@ -5,13 +5,20 @@ import Navbar from '../components/Navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot, faSquareParking, faStore } from '@fortawesome/free-solid-svg-icons'
 import Footer from "../components/Footer"
+import useFetch from '../../hooks/useFetch'
+import { useParams } from 'react-router-dom'
 const Hotel = () => {
+  const {id} = useParams();
   const [slideNumber, setSlideNumber] = useState(0);
   const [openSlider, setOpenSlider] = useState(false);
+  const {data, loading, error} = useFetch(`/hotels/find/${id}`);
+
+  // Xử lý khi bấm vào ảnh
   const handleOpen= (i)=>{
     setSlideNumber(i);
     setOpenSlider(true);
   }
+  // Xử lý khi bấm vào nút qua lại
   const handleMove=(direction)=>{
     let newSlideNumber;
     if(direction === "l")
@@ -25,7 +32,7 @@ const Hotel = () => {
       setSlideNumber(newSlideNumber);
     }
   }
-  const photo=[
+  /*const photo=[
     {
       src:"https://cf.bstatic.com/xdata/images/hotel/max1280x900/495325827.jpg?k=0d2427c627abce0f8d74dafdad58a82a214c60785edbe9462be65c62eb476b5a&o=&hp=1"
     },
@@ -44,44 +51,44 @@ const Hotel = () => {
     {
       src:"https://cf.bstatic.com/xdata/images/hotel/max1280x900/499284254.jpg?k=ac20dd93417e1fe90e6222d6c1a93eda0deb836c5f670f10a87c7a6dcede54e3&o=&hp=1"
     }
-  ]
+  ]*/
   return (
     <div>
       <Navbar/>
-      <div className='hotelContainer'>
+      {loading ? "loading":(<div className='hotelContainer'>
        { openSlider && <div className="slider">
           <div className="sliderWrapper">
             <FontAwesomeIcon icon={faCircleXmark} className='close' onClick={()=>setOpenSlider(false)}/>
             <FontAwesomeIcon icon={faCircleArrowLeft} className='arrow' onClick={()=>handleMove("l")}/>
-            <img src={photo[slideNumber].src} alt="" className="sliderImg" />
+            <img src={data.photos[slideNumber]} alt="" className="sliderImg" />
             <FontAwesomeIcon icon={faCircleArrowRight} className='arrow' onClick={()=>handleMove("r")}/>
           </div>
           
         </div>  }
         <div className="hotelWrapper">
           <button className="bookNow">Đặt Ngay</button>
-          <h1 className="hotelTitle">Khách Sạn ABC</h1>
+          <h1 className="hotelTitle">{data.name}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon>
-            <span className=''>Quận 7 thành phố Hồ Chí Minh</span>
+            <span className=''>{data.address}, {data.city}</span>
           </div>
           <span className="hotelDistance">
-            Cách xa trung tâm thành phố 500 m
+            Cách xa trung tâm thành phố {data.distance}m
           </span>
           <div className="hotelImages">
             {
-              photo.map((photo, index)=>(
+              data.photos?.map((photo, index)=>(
                 <div className="hotelImgWrapper">
-                  <img onClick={()=>handleOpen(index)} src={photo.src} alt="" className="hotelImg" />
+                  <img onClick={()=>handleOpen(index)} src={photo} alt="" className="hotelImg" />
                 </div>
               ))
             }
           </div>
           <div className="hotelDetails">
             <div className="hotelDetailsText">
-             <h1 className="hotelTitle">Giới thiệu sơ lược về khách sạn</h1>
+             <h1 className="hotelTitle">{data.title}</h1>
              <p className="hotelDesc">
-              Hãy để chuyến đi của quý khách có một khởi đầu tuyệt vời khi ở lại khách sạn này, nơi có Wi-Fi miễn phí trong tất cả các phòng. Nằm ở vị trí trung tâm tại Quận 7 của Hồ Chí Minh, chỗ nghỉ này đặt quý khách ở gần các điểm thu hút và tùy chọn ăn uống thú vị. Đừng rời đi trước khi ghé thăm Bảo tàng Chứng tích chiến tranh nổi tiếng. Được xếp hạng 4 sao, chỗ nghỉ chất lượng cao này cho phép khách nghỉ sử dụng bể bơi ngoài trời và spa ngay trong khuôn viên.
+              {data.desc}
              </p>
             </div>
             <div className="hotelDetailsPrice">
@@ -95,13 +102,13 @@ const Hotel = () => {
                 <span>Gần trung tâm mua sắn Cresent Mall</span>
               </div>
               <h2>
-                <b>VNĐ 500.000 / Đêm</b>
+                <b>VNĐ {data.cheapestPrice}/ Đêm</b>
               </h2>
               <button>Lưu lại hoặc đặt chỗ ngay!</button>
             </div>
           </div>
         </div>
-      </div>
+      </div>)}
       <Footer/>
     </div>
   )

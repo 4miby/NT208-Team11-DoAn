@@ -19,7 +19,7 @@ const useFetch = (url)=>{
         setLoading(false);
     };
     fecthData();
-  },[url]);
+  },[]);
 
   const reFetch = async()=>{
     setLoading(true);
