@@ -1,22 +1,29 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './navbar.css'
 import logo from '../../Resources/icons/hotel.png'
-import { Link } from 'react-router-dom'
-import user from '../../Resources/icons/user.png'
+import { Link, useNavigate } from 'react-router-dom'
+import userpng from "../../Resources/icons/user.png"
 import logout from '../../Resources/icons/log-out.png'
 import question from '../../Resources/icons/question.png'
 import reserve from "../../Resources/icons/reserve.png"
 import DropDownItem from './Dropdownitem'
+import { AuthContext } from '../../context/AuthContext'
 const Navbar = () => {
-  const [isLogin,setisLogin] = useState(false);
+  const navigate = useNavigate();
   const [isDrop,setIsDrop]= useState(false);
-  const handleLogin = ()=>{
-    setisLogin(true);
+  const {user,dispatch} = useContext(AuthContext);
+  const handleSignIn =()=>{
+      navigate("/login")
+  }
+  const handleSignOut = ()=>{
+    dispatch({type:"LOGOUT"});
+    setIsDrop(false);
   }
   const onclickHandle = ()=>
   {
     setIsDrop(!isDrop);
   }
+
   const ExploreClick = ()=>
   {
     window.scrollTo(
@@ -26,6 +33,7 @@ const Navbar = () => {
       }
     )
   }
+
   const RoomClick = ()=>
   {
     window.scrollTo(
@@ -35,6 +43,7 @@ const Navbar = () => {
       }
     )
   }
+
   const ServiceClick = ()=>
   {
     window.scrollTo(
@@ -53,16 +62,17 @@ const Navbar = () => {
       <h1>WandeRest</h1>
       <p onClick={RoomClick}>Phòng</p>
       <p onClick={ServiceClick}>Dịch Vụ</p>
-      {!isLogin &&<button onClick={handleLogin}>Đăng nhập</button>}
-      {isLogin && <button onClick={onclickHandle}>Tài khoản</button>}
-      {<div className={`DropDownMenu ${isDrop ? 'active' :'inactive'}`}>
-      <DropDownItem text="Thông tin" img={user} path="/infor"></DropDownItem>
+      {!user &&<button onClick={handleSignIn}>Đăng nhập</button>}
+      { user && <button onClick={onclickHandle}>{user.username}</button>}
+
+      {user && (<div className={`DropDownMenu ${isDrop ? 'active' :'inactive'}`}>
+      <DropDownItem text="Thông tin" img={userpng} path={`/infor/${user._id}`}></DropDownItem>
       <DropDownItem text="Đặt chỗ" img={reserve} path="/AboutUs"></DropDownItem>
       <DropDownItem text="Về chúng tôi" img={question} path="/AboutUs"></DropDownItem>
-      <DropDownItem text="Đăng xuất" img={logout}></DropDownItem>
-      </div>}
-
-      
+      <div onClick={handleSignOut}>
+        <DropDownItem text="Đăng xuất"  img={logout}></DropDownItem>
+      </div>
+      </div>)}
     </div>
   )
 }

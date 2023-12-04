@@ -3,7 +3,9 @@ import React from 'react'
 import { faLocationDot} from '@fortawesome/free-solid-svg-icons'
 import './sale.css'
 import useFetch from "../../hooks/useFetch"
+import { currencyFormat } from '../../utils/CurrencyFormat'
 const Sale = () => {
+  //Fetch featured hotel data && limit =3
   const {data,loading,error} = useFetch("/hotels?featured=true&limit=3");
   return (
     <div className='sale-container'>
@@ -27,7 +29,7 @@ const Sale = () => {
             <p>{item.address}, {item.city}</p>
             </div>
             <p>{item.title}</p>
-            <p className='price'>VNĐ {item.cheapestPrice} / Đêm</p>
+            <p className='price'>VNĐ {currencyFormat(item.cheapestPrice)} / Đêm</p>
             <p className='sale'></p>
         </div>
       ))} 

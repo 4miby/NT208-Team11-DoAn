@@ -98,3 +98,6 @@
 .booking-button:hover{
   opacity: 0.9; 
 }
+.date{
+  z-index: 100;
+}

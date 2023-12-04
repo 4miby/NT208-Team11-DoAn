@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {useState} from 'react'
 import './Hotel.css'
 import Navbar from '../components/Navbar'
@@ -7,12 +7,24 @@ import {faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot, faS
 import Footer from "../components/Footer"
 import useFetch from '../../hooks/useFetch'
 import { useParams } from 'react-router-dom'
+import { SearchContext } from '../../context/SearchContext'
+import { currencyFormat } from '../../utils/CurrencyFormat'
 const Hotel = () => {
   const {id} = useParams();
   const [slideNumber, setSlideNumber] = useState(0);
   const [openSlider, setOpenSlider] = useState(false);
+
   const {data, loading, error} = useFetch(`/hotels/find/${id}`);
 
+  const {dates,options} = useContext(SearchContext);
+  // Hàm đếm số ngày cách nhau
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  function dayDifference(date1, date2) {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return diffDays;
+  }
+  const days = dayDifference(dates[0].endDate,dates[0].startDate);
   // Xử lý khi bấm vào ảnh
   const handleOpen= (i)=>{
     setSlideNumber(i);
@@ -32,26 +44,7 @@ const Hotel = () => {
       setSlideNumber(newSlideNumber);
     }
   }
-  /*const photo=[
-    {
-      src:"https://cf.bstatic.com/xdata/images/hotel/max1280x900/495325827.jpg?k=0d2427c627abce0f8d74dafdad58a82a214c60785edbe9462be65c62eb476b5a&o=&hp=1"
-    },
-    {
-      src:"https://cf.bstatic.com/xdata/images/hotel/max1280x900/499284096.jpg?k=d16ee2fc2047280e5a70531052febd6db74274770d5aa24a0621582b941e73bf&o=&hp=1"  
-    },
-    {
-      src:"https://cf.bstatic.com/xdata/images/hotel/max1280x900/499284091.jpg?k=a0ed3e1e99a5aded8738668c729c788101078b4d0330ae8b4b4d769e722e7c2f&o=&hp=1"
-    },
-    {
-      src:"https://cf.bstatic.com/xdata/images/hotel/max1280x900/499284093.jpg?k=3146f5f0d336fa11e59ce7dc9af0c3583b93e03d6c7076701216409b33a1048a&o=&hp=1"
-    },
-    {
-      src:"https://cf.bstatic.com/xdata/images/hotel/max1280x900/499284250.jpg?k=dd9502e4840f3186a0ae636fa1801de5b4a9ab8e6099fd8f1e9a6332e828686d&o=&hp=1"
-    },
-    {
-      src:"https://cf.bstatic.com/xdata/images/hotel/max1280x900/499284254.jpg?k=ac20dd93417e1fe90e6222d6c1a93eda0deb836c5f670f10a87c7a6dcede54e3&o=&hp=1"
-    }
-  ]*/
+  
   return (
     <div>
       <Navbar/>
@@ -92,17 +85,20 @@ const Hotel = () => {
              </p>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>Điểm nổi bật của chỗ nghỉ</h1>
+              <div className='hotelDetailsPriceTitle'>
+                <h1>Điểm nổi bật của chỗ nghỉ</h1>
+                <h2>Hoàn hảo cho kỳ nghỉ {days} đêm!</h2>
+              </div>
               <div className='hotelHighlight'>
                 <FontAwesomeIcon icon= {faSquareParking} />
                 <span>Có chỗ đậu xe riêng MIỄN PHÍ!</span>
               </div>
               <div className="hotelHighlight">
                 <FontAwesomeIcon icon={faStore}/>
-                <span>Gần trung tâm mua sắn Cresent Mall</span>
+                <span>Gần trung tâm mua sắm Cresent Mall</span>
               </div>
               <h2>
-                <b>VNĐ {data.cheapestPrice}/ Đêm</b>
+                <b>VNĐ {currencyFormat(data.cheapestPrice * days * options.room)}/ {days} Đêm</b>
               </h2>
               <button>Lưu lại hoặc đặt chỗ ngay!</button>
             </div>
