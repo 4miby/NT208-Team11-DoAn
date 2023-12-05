@@ -7,6 +7,7 @@ import PollOutlinedIcon from '@mui/icons-material/PollOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link } from "react-router-dom";
 const Sidebar = () => {
     return (
     <div className='sidebar'>
@@ -17,15 +18,19 @@ const Sidebar = () => {
         <div className="lists">
             <ul>
                 <p className="title">MAIN</p>
-                <li>
-                    <DashboardIcon className="icon"/>
-                    <span>Dashboard</span>
-                </li>
+                <Link to="/dashboard" style={{textDecoration: "none"}}>
+                    <li>
+                        <DashboardIcon className="icon"/>
+                        <span>Dashboard</span>
+                    </li>
+                </Link>
                 <p className="title">LISTS</p>
-                <li>
-                    <PersonOutlineOutlinedIcon className="icon"/>
-                    <span>Users</span>
-                </li>
+                <Link to="/users" style={{textDecoration: "none"}}>
+                    <li>
+                        <PersonOutlineOutlinedIcon className="icon"/>
+                        <span>Users</span>
+                    </li>
+                </Link>
                 <li>
                     <SensorDoorOutlinedIcon className="icon"/>
                     <span>Rooms</span>
