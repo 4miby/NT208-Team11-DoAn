@@ -6,15 +6,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot, faSquareParking, faStore } from '@fortawesome/free-solid-svg-icons'
 import Footer from "../components/Footer"
 import useFetch from '../../hooks/useFetch'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
 import { currencyFormat } from '../../utils/CurrencyFormat'
+import { AuthContext } from '../../context/AuthContext'
+import Reserve from './Reserve'
 const Hotel = () => {
   const {id} = useParams();
   const [slideNumber, setSlideNumber] = useState(0);
   const [openSlider, setOpenSlider] = useState(false);
-
+  const [openModal, setOpenModal] = useState(false);
   const {data, loading, error} = useFetch(`/hotels/find/${id}`);
+  const {user} = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const {dates,options} = useContext(SearchContext);
   // Hàm đếm số ngày cách nhau
@@ -24,7 +28,7 @@ const Hotel = () => {
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
-  const days = dayDifference(dates[0].endDate,dates[0].startDate);
+  const days = dayDifference(dates[0].endDate ,dates[0].startDate);
   // Xử lý khi bấm vào ảnh
   const handleOpen= (i)=>{
     setSlideNumber(i);
@@ -44,7 +48,15 @@ const Hotel = () => {
       setSlideNumber(newSlideNumber);
     }
   }
-  
+  // Xử lý khi bấm vào nút đặt phòng
+  const handleClick = ()=>{
+    if(user){
+        setOpenModal(true);
+    }
+    else{
+      navigate("/login")
+    }
+  }
   return (
     <div>
       <Navbar/>
@@ -100,11 +112,12 @@ const Hotel = () => {
               <h2>
                 <b>VNĐ {currencyFormat(data.cheapestPrice * days * options.room)}/ {days} Đêm</b>
               </h2>
-              <button>Lưu lại hoặc đặt chỗ ngay!</button>
+              <button onClick={handleClick}>Lưu lại hoặc đặt chỗ ngay!</button>
             </div>
           </div>
         </div>
       </div>)}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
       <Footer/>
     </div>
   )
