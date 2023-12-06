@@ -1,8 +1,9 @@
 import Dashboard from './Admin/Dashboard/dashboard';
+import Info from './Admin/Info/info';
+import Users from './Admin/Users/users';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Users from './Users/users';
-import Info from './Info/info';
+
 function App() {
   return (
     <div className="App">

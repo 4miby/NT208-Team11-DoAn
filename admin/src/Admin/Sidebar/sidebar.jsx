@@ -7,6 +7,8 @@ import PollOutlinedIcon from '@mui/icons-material/PollOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import DomainIcon from '@mui/icons-material/Domain';
+
 import { Link } from "react-router-dom";
 const Sidebar = () => {
     return (
@@ -31,6 +33,10 @@ const Sidebar = () => {
                         <span>Users</span>
                     </li>
                 </Link>
+                <li>
+                    <DomainIcon className="icon"/>
+                    <span>Hotels</span>
+                </li>
                 <li>
                     <SensorDoorOutlinedIcon className="icon"/>
                     <span>Rooms</span>
