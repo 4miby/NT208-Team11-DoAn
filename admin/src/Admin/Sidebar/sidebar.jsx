@@ -44,10 +44,12 @@ const Sidebar = () => {
                     <span>Notifications</span>
                 </li>
                 <p className="title">USER</p>
+                <Link to="/info" style={{textDecoration: "none"}}>
                 <li>
                     <AccountCircleIcon className="icon"/>
                     <span>Profile</span>
                 </li>
+                </Link>
                 <li>
                     <ExitToAppIcon className="icon"/>
                     <span>Logout</span>

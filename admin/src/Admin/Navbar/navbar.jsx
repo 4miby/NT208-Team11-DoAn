@@ -5,8 +5,13 @@ import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
-
+import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
+  const navigate = useNavigate();
+  const Info = ()=>
+  {
+    navigate("/info")
+  }
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -35,9 +40,10 @@ const Navbar = () => {
           </div>
           <div className="item">
             <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
               alt=""
               className="avatar"
+              onClick={Info}
             />
           </div>
         </div>
