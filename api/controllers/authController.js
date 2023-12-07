@@ -41,3 +41,11 @@ export const login =  async(req,res,next)=>{
     next(err);
   }
 }
+export const logout = (req,res)=>{
+  try{
+    res.clearCookie('access_token').json("Đã đăng xuất");
+  }
+  catch{
+    next(err);
+  }
+}

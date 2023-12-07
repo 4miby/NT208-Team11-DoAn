@@ -1,0 +1,54 @@
+.inforContainer{
+  display: flex;
+  padding-top: 120px;
+  height: 85vh;
+}
+.imgContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+.imgContainer>img{
+  width: 300px;
+  height: 300px;
+  border: 1px solid #55AAE1;
+  border-radius: 50%;
+}
+.changeContainer{
+  display: flex;
+  flex-direction: column;
+}
+.changeInfo{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid #A3A0A0;
+  padding: 15px;
+  border-radius: 16px;
+}
+.changeItem{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.changeItem>label{
+  font-weight: 500;
+}
+.changeItem>input{
+  padding: 10px;
+  width: 350px;
+  border: 1px solid #9f9f9f;
+  border-radius: 6px;
+}
+.changeInfo>button{
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #65AEF2;
+  border: none;
+  border-radius: 6px;
+  padding: 15px;
+  cursor: pointer;
+}

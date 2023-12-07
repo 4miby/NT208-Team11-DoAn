@@ -8,16 +8,21 @@ import question from '../../Resources/icons/question.png'
 import reserve from "../../Resources/icons/reserve.png"
 import DropDownItem from './Dropdownitem'
 import { AuthContext } from '../../context/AuthContext'
+import axios from 'axios'
 const Navbar = () => {
   const navigate = useNavigate();
   const [isDrop,setIsDrop]= useState(false);
   const {user,dispatch} = useContext(AuthContext);
+  // Hàm xóa trường dữ liệu trong cookie
+// Xử lý khi bấm vào nút đăng nhập
   const handleSignIn =()=>{
       navigate("/login")
   }
+  // Xử lý khi bấm vào nút đăng xuất
   const handleSignOut = ()=>{
     dispatch({type:"LOGOUT"});
     setIsDrop(false);
+    axios.get("/auth/logout");
   }
   const onclickHandle = ()=>
   {

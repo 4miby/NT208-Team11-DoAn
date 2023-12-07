@@ -14,6 +14,9 @@ const UserSchema = new mongoose.Schema({
     type:String,
     required: true
   },
+  OTP:{
+    type:String
+  },
   isAdmin: {
     type: Boolean,
     default: false
