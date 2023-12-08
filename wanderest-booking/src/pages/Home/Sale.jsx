@@ -1,12 +1,33 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useContext, useState} from 'react'
 import { faLocationDot} from '@fortawesome/free-solid-svg-icons'
 import './sale.css'
 import useFetch from "../../hooks/useFetch"
 import { currencyFormat } from '../../utils/CurrencyFormat'
+import { useNavigate } from 'react-router-dom'
+import { SearchContext } from '../../context/SearchContext'
 const Sale = () => {
+  const navigate = useNavigate();
   //Fetch featured hotel data && limit =3
   const {data,loading,error} = useFetch("/hotels?featured=true&limit=3");
+  const [destination, setDestination] = useState("");
+  const [dates, setDates] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
+  const [options, setOptions] = useState({
+    adult:1,
+    children:0,
+    room:1
+  });
+  const {dispatch} = useContext(SearchContext);
+  const handleClick = (id)=>{
+    dispatch({type:"NEW_SEARCH",payload:{destination,dates,options}})
+    navigate(`/hotels/${id}`, {state:{destination, dates, options}})
+  }
   return (
     <div className='sale-container'>
       <h1>Các nhà ở được yêu thích</h1>
@@ -14,7 +35,9 @@ const Sale = () => {
       <div className='sale-room-container'>
       {loading ? ("Loading"): 
       (<>{data.map(item=>(
-            <div className='sale-room' key={item._id}>
+            <div className='sale-room' key={item._id}
+            onMouseOver={()=>setDestination(item.city)} 
+            onClick={()=>handleClick(item._id)}>
             <img alt="" src={item.photos[0]}></img>
             <div className='room-info'>
               <div className='roomTitleContainer'>

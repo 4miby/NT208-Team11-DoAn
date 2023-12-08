@@ -23,6 +23,7 @@ const Navbar = () => {
     dispatch({type:"LOGOUT"});
     setIsDrop(false);
     axios.get("/auth/logout");
+    navigate("/");
   }
   const onclickHandle = ()=>
   {

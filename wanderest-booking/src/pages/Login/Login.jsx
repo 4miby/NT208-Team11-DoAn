@@ -37,7 +37,7 @@ const Login = () => {
       dispatch({type:"LOGIN_FAILURE", payload: err.response.data})
     }
   }
-
+  
   return (
     <div className='login-page'>
       <div className="backgroundSlider">   
@@ -60,9 +60,9 @@ const Login = () => {
             <Link>Quên mật khẩu</Link>
             <button disabled={loading} >Đăng nhập</button>
           </form>
-          <div className='LinktoRegister'>
+          <div className='LinktoRegister' >
               <p>Chưa có tài khoản?</p>
-              <Link>Tạo tài khoản</Link>
+              <Link to={"/register"}>Tạo tài khoản</Link>
           </div>
           <div className='LinktoServices'>
             <Link>Điều khoản</Link>

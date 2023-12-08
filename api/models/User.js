@@ -17,6 +17,18 @@ const UserSchema = new mongoose.Schema({
   OTP:{
     type:String
   },
+  address:{
+    type:String,
+  },
+  phoneNumber:{
+    type:String,
+  },
+  GT:{
+    type:String,
+  },
+  Birth:{
+    type:String
+  },
   isAdmin: {
     type: Boolean,
     default: false
