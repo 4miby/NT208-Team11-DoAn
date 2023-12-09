@@ -69,7 +69,11 @@ const Navbar = () => {
       <p onClick={RoomClick}>Phòng</p>
       <p onClick={ServiceClick}>Dịch Vụ</p>
       {!user &&<button onClick={handleSignIn}>Đăng nhập</button>}
-      { user && <button onClick={onclickHandle}>{user.username}</button>}
+      { user && (<div className='AccountButton'>
+        <img src={user.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} /> 
+        <span onClick={onclickHandle}>{user.username}</span>
+      </div>)
+      }
 
       {user && (<div className={`DropDownMenu ${isDrop ? 'active' :'inactive'}`}>
       <DropDownItem text="Thông tin" img={userpng} path={`/infor/${user._id}`}></DropDownItem>

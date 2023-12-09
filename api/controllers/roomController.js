@@ -66,7 +66,7 @@ export const deleteRoom = async(req,res,next)=>{
 //GET ONE ROOM
 export const getRoom = async(req,res,next)=>{
   try{
-    const room = await Hotel.findById(req.params.id)
+    const room = await Room.findById(req.params.id)
     res.status(200).json(room);
   }
   catch(err){
@@ -76,7 +76,7 @@ export const getRoom = async(req,res,next)=>{
 //GET ALL ROOM
 export const getAllRooms = async(req,res,next)=>{
   try{
-    const room = await Hotel.find();
+    const room = await Room.find();
     res.status(200).json(room);
   }
   catch(err){

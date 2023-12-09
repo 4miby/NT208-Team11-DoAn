@@ -43,8 +43,7 @@
   text-shadow: 2px 4px 4px rgb(127, 126, 126);
   line-height: 30px;
 }
-.navbar button
-{
+.navbar>button{
   font-size: 24px;
   font-weight: bold;
   color: white;
@@ -53,10 +52,25 @@
   padding: 15px 32px;
   cursor: pointer;
 }
-.navbar button:hover
-{
-  opacity: 0.9;
+.AccountButton{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #65AEF2;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 10px 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
 }
+.AccountButton>img{
+  width: 40px;
+  height: 40px;
+  border: 1px #efefef solid;
+  border-radius: 50%; 
+}
+
 /* Phần dropdownMenu*/
 .DropDownMenu
 {

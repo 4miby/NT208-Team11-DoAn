@@ -16,6 +16,16 @@
   border: 1px solid #55AAE1;
   border-radius: 50%;
 }
+.imgContainer>input{
+  margin-top: 1rem;
+}
+.imgContainer>input::file-selector-button {
+  font-weight: bold;
+  color: dodgerblue;
+  padding: 0.5em;
+  border: thin solid grey;
+  border-radius: 3px;
+}
 .changeContainer{
   display: flex;
   flex-direction: column;
@@ -52,3 +62,4 @@
   padding: 15px;
   cursor: pointer;
 }
+

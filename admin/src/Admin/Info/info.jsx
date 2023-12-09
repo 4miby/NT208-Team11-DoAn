@@ -1,7 +1,7 @@
 import React from "react";
 import './info.scss'
-import Sidebar from "../Sidebar/sidebar";
-import Navbar from "../Navbar/navbar";
+import Sidebar from "../components/Sidebar/sidebar";
+import Navbar from "../components/Navbar/navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 

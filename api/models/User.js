@@ -29,6 +29,9 @@ const UserSchema = new mongoose.Schema({
   Birth:{
     type:String
   },
+  img:{
+    type:String
+  },
   isAdmin: {
     type: Boolean,
     default: false

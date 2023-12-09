@@ -1,11 +1,11 @@
 import React from "react";
-import Sidebar from "../Sidebar/sidebar";
+import Sidebar from "../components/Sidebar/sidebar";
 import './dashboard.scss'
-import Navbar from "../Navbar/navbar";
-import Widget from "../Widgets/widgets";
-import Chart from "../Chart/chart";
-import Featured from "../Featured/featured";
-import Tables from "../Table/table";
+import Navbar from "../components/Navbar/navbar";
+import Widget from "../components/Widgets/widgets";
+import Chart from "../components/Chart/chart";
+import Featured from "../components/Featured/featured"
+import Tables from "../components/Table/table"
 
 const Dashboard = () => {
     return (
