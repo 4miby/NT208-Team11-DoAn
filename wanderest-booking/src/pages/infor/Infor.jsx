@@ -23,7 +23,7 @@ const Infor = () => {
   useEffect(()=>{
     const userimg = data.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"
     setImg(userimg);
-  },[img]);
+  });
   // Xử lý nhập dữ liệu
   const inputChangeHandler = (e)=>{
     const {name,value} = e.target;
@@ -37,8 +37,18 @@ const Infor = () => {
   // Xu ly khi bam nut update
   const handleClick = async(e)=>{
     e.preventDefault();
+    const datafile = new FormData();
+    datafile.append("file",file);
+    datafile.append("upload_preset","upload");
     try{
-      await axios.put(`/users/${id}`, user);
+      const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/amiby/image/upload",datafile);
+      console.log(uploadRes.data);
+      const {url} = uploadRes.data;
+      const newUser = {
+        ...user,
+        img:url
+      }
+      await axios.put(`/users/${id}`, newUser);
       navigate("/");
     }
     catch(err)

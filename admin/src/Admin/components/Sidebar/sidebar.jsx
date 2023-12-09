@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext }  from "react";
 import "./sidebar.scss"
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
@@ -8,9 +8,16 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DomainIcon from '@mui/icons-material/Domain';
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
+import axios from 'axios'
 
-import { Link } from "react-router-dom";
 const Sidebar = () => {
+    const {dispatch} = useContext(AuthContext);
+    const handleClick = async ()=>{
+        dispatch({type:"LOGOUT"});
+        await axios.get("/auth/logout");
+    }
     return (
     <div className='sidebar'>
         <div className="top">
@@ -62,7 +69,7 @@ const Sidebar = () => {
                 </Link>
                 <li>
                     <ExitToAppIcon className="icon"/>
-                    <span>Logout</span>
+                    <span onClick={handleClick}>Logout</span>
                 </li>
             </ul>
         </div>

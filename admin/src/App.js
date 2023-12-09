@@ -9,7 +9,8 @@ import List from './Admin/List/List';
 import New from './Admin/New/New';
 import { hotelColumns, roomColumns, userColumns } from './datatablesource';
 import { userInputs } from './formsource';
-
+import NewHotel from './Admin/NewHotel/NewHotel';
+import NewRoom from './Admin/newRoom/NewRoom';
 
 function App() {
   const ProtectedRoute = ({children}) =>{
@@ -34,8 +35,7 @@ function App() {
           element={<ProtectedRoute>
             <List columns={userColumns}/>
           </ProtectedRoute>}/>
-
-            <Route path='users/new'
+          <Route path='users/new'
             element = {<ProtectedRoute>
               <New inputs={userInputs} title="Add New User" />
             </ProtectedRoute>}
@@ -45,11 +45,21 @@ function App() {
           element={<ProtectedRoute>
             <List columns={hotelColumns}/>
           </ProtectedRoute>}/>
+          <Route path='hotels/new'
+            element = {<ProtectedRoute>
+              <NewHotel/>
+            </ProtectedRoute>}
+            />
+
           <Route path='rooms' 
           element={<ProtectedRoute>
             <List columns={roomColumns}/>
           </ProtectedRoute>}/>
-          
+          <Route path='rooms/new'
+            element = {<ProtectedRoute>
+              <NewRoom/>
+            </ProtectedRoute>}
+            />
 
           <Route path='info'
           element={<ProtectedRoute>

@@ -19,10 +19,10 @@ const Navbar = () => {
       navigate("/login")
   }
   // Xử lý khi bấm vào nút đăng xuất
-  const handleSignOut = ()=>{
+  const handleSignOut = async ()=>{
     dispatch({type:"LOGOUT"});
     setIsDrop(false);
-    axios.get("/auth/logout");
+    await axios.get("/auth/logout");
     navigate("/");
   }
   const onclickHandle = ()=>
