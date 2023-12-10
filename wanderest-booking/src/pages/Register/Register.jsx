@@ -4,6 +4,7 @@ import logo from '../../Resources/icons/hotel1.png'
 import { Link, useNavigate } from 'react-router-dom'
 import './Register.css'
 import axios from "axios";
+import toast from 'react-hot-toast'
 const Register = () => {
   const imageslide = [
     "https://images.pexels.com/photos/14435439/pexels-photo-14435439.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -20,8 +21,12 @@ const Register = () => {
   const handleSubmit = async(e)=>{
     e.preventDefault();
     try{
-      await axios.post("/auth/register",info);
-      navigate("/login");
+      await axios.post("/auth/register",info)
+      .then((respone)=>{
+        toast.success(respone.data, {position:'top-right'});
+        navigate("/login");
+      })
+      
     }
     catch(err){
       console.log(err);

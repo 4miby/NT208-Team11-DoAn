@@ -6,7 +6,10 @@ import { useState } from "react";
 import axios from "axios";
 import { hotelInputs } from "../../formsource";
 import useFetch from "../../hooks/useFetch"
+import {useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
 const NewHotel = () => {
+  const navigate = useNavigate();
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
@@ -41,7 +44,11 @@ const NewHotel = () => {
         rooms,
         photos:list
       };
-      await axios.post("/hotels", newHotel);
+      await axios.post("/hotels", newHotel)
+      .then((respone)=>{
+        toast.success(respone.data, {position:'top-right'});
+        navigate("/");
+      })
     }catch(err){
 
     }

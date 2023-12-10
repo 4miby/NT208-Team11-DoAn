@@ -15,7 +15,7 @@ export const createRoom = async(req,res,next)=>{
       {
         next(err);
       }
-      res.status(200).json(newRoom);
+      res.status(200).json("Room has been created");
   } 
   catch(err){
     next(err);

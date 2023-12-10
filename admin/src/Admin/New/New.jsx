@@ -2,10 +2,12 @@ import "./new.scss";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import Navbar from "../components/Navbar/navbar";
 import Sidebar from "../components/Sidebar/sidebar";
+import {useNavigate} from "react-router-dom"
 import { useState } from "react";
 import axios from "axios";
-
+import toast from "react-hot-toast"
 const New = ({ inputs, title }) => {
+  const navigate = useNavigate();
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
   const handleChange = (e)=>{
@@ -24,7 +26,11 @@ const New = ({ inputs, title }) => {
         ...info,
         img:url
       }
-      await axios.post("/auth/register", newUser);
+      await axios.post("/auth/register", newUser)
+      .then((respone)=>{
+        toast.success(respone.data, {position:'top-right'});
+        navigate("/");
+      })
     }catch(err){
       console.log(err);
     }

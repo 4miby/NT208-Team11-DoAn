@@ -5,12 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext';
-
+import {Toaster} from "react-hot-toast";
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <Router>
     <AuthContextProvider>
       <App />
+      <Toaster/>
     </AuthContextProvider>
   </Router>
 

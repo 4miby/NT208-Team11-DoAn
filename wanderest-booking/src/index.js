@@ -5,13 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { SearchContextProvider } from './context/SearchContext';
 import { AuthContextProvider } from './context/AuthContext';
-
+import {Toaster} from "react-hot-toast"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
     <AuthContextProvider>
       <SearchContextProvider>
             <App />
+            <Toaster/>
       </SearchContextProvider>
     </AuthContextProvider>
 

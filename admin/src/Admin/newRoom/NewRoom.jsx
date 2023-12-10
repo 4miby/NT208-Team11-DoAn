@@ -6,8 +6,10 @@ import { useState } from "react";
 import axios from "axios";
 import { roomInputs } from "../../formsource";
 import useFetch from "../../hooks/useFetch";
-
+import {useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
 const NewRoom = () => {
+  const navigate = useNavigate();
   const [info, setInfo] = useState({});
   const [hotelId, setHotelId] = useState(undefined);
   const [rooms, setRooms] = useState([]);
@@ -23,6 +25,10 @@ const NewRoom = () => {
     const roomNumbers = rooms.split(",").map(room=>({number:room}))
     try{
         await axios.post(`/rooms/${hotelId}`,{...info, roomNumbers})
+        .then((respone)=>{
+          toast.success(respone.data, {position:'top-right'});
+          navigate("/");
+        })
     }catch(err){
       console.log(err);
     }
