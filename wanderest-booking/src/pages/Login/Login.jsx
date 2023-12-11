@@ -57,7 +57,7 @@ const Login = () => {
             <input type='password' required id="password"
             onChange={handleChange}
             placeholder='Nhập mật khẩu của bạn'></input>
-            <Link>Quên mật khẩu</Link>
+            <Link to={"/reset"}>Quên mật khẩu</Link>
             <button disabled={loading} >Đăng nhập</button>
           </form>
           <div className='LinktoRegister' >

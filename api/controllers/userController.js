@@ -19,7 +19,7 @@ export const deleteUser = async(req,res,next)=>{
     next(err);
   }
 }
-//GET ONE HOTEL
+//GET ONE USER
 export const getUser = async(req,res,next)=>{
   try{
     const user = await User.findById(req.params.id)
@@ -29,7 +29,7 @@ export const getUser = async(req,res,next)=>{
     next(err);
   }
 }
-//GET ALL HOTEL
+//GET ALL USERS
 export const getAllUser = async(req,res,next)=>{
   try{
     const users = await User.find();

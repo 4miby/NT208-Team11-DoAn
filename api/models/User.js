@@ -14,9 +14,6 @@ const UserSchema = new mongoose.Schema({
     type:String,
     required: true
   },
-  OTP:{
-    type:String
-  },
   address:{
     type:String,
   },
@@ -31,6 +28,9 @@ const UserSchema = new mongoose.Schema({
   },
   img:{
     type:String
+  },
+  bookings:{
+    type:[String]
   },
   isAdmin: {
     type: Boolean,
