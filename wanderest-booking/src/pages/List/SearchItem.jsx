@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './SearchItem.css'
 import { currencyFormat } from '../../utils/CurrencyFormat'
+import { CityFormat } from '../../utils/CityFormat'
 const SearchItem = ({item}) => {
   return (
     <div className='Search-Item'>
@@ -11,7 +12,7 @@ const SearchItem = ({item}) => {
       />
       <div className='siDesc'>
         <h1 className='siTitle'>{item.name}</h1>
-        <span className='siAddress'>{item.address}, {item.city}</span>
+        <span className='siAddress'>{item.address}, {CityFormat(item.city)}</span>
         <span className='siDistance'>Cách xa Trung Tâm thành phố {item.distance}</span>
         <span className='siSubtitle'>
           Phòng có điều hòa, rộng 21 m vuông và có 2 giường ngủ

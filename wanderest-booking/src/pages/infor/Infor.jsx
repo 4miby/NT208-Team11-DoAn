@@ -40,6 +40,7 @@ const Infor = () => {
     const datafile = new FormData();
     datafile.append("file",file);
     datafile.append("upload_preset","upload");
+    
     try{
       const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/amiby/image/upload",datafile);
       console.log(uploadRes.data);
@@ -61,8 +62,10 @@ const Infor = () => {
   return (
       <div className="inforPage">
         <Navbar/>
+
         {loading ? "Loading" : (
         <div className='inforContainer'>
+
           <div className='imgContainer'>
             <img src={
                 file
@@ -78,6 +81,8 @@ const Infor = () => {
             > 
             </input>
           </div>
+
+          
           <div className='changeContainer'>
             <h2>Thay đổi thông tin</h2>
             <form className='changeInfo'>

@@ -1,3 +1,4 @@
+import Reservation from "../models/Reservation.js";
 import User from "../models/User.js"
 //UPDATE
 export const updateUser = async(req,res,next)=>{
@@ -39,3 +40,20 @@ export const getAllUser = async(req,res,next)=>{
     next(err);
   }
 }
+
+// GET USER RESERVATION
+export const getUserReservations = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const list = await Promise.all(
+      user.reservations.map((reservation) => {
+        return Reservation.findById(reservation);
+      })
+    );
+    res.status(200).json(list)
+  } catch (err) {
+    next(err);
+  }
+};
+
+

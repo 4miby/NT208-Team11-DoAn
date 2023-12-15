@@ -18,7 +18,13 @@ const Datatable = ({columns}) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/${path}/${id}`);
+      if(path === "rooms")
+      {
+        await axios.delete(`/${path}/${id}/`);
+      }
+      else{
+        await axios.delete(`/${path}/${id}`);
+      }
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };

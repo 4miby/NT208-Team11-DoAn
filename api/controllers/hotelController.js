@@ -24,6 +24,11 @@ export const updateHotel = async(req,res,next)=>{
 //DELETE
 export const deleteHotel = async(req,res,next)=>{
   try{
+    const hotel = await Hotel.findById(req.params.id);
+    const rooms = hotel.rooms;
+    await Promise.all(rooms.map(async (room)=>{
+      await Room.findByIdAndDelete(room);
+    }))
     await Hotel.findByIdAndDelete(req.params.id)
     res.status(200).json("Hotel has been deleted.");
   }

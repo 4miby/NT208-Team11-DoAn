@@ -2,44 +2,43 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { currencyFormat } from '../../utils/CurrencyFormat'
+import { CityFormat } from '../../utils/CityFormat'
 import './mybooking.css'
+import useFetch from '../../hooks/useFetch'
+import { useParams } from 'react-router-dom'
+import { format} from 'date-fns'  
 const MyBooking = () => {
+  const {id} = useParams();
+  const {data, loading, error} = useFetch(`/users/reservations/${id}`);
+  console.log(data);
   return (
     <div className='mybooking-page'>
       <Navbar/>
       <h2>Đặt chỗ của bạn</h2>
-      <div className="bookingContainer">
-        <div className="bookingItem">
-          <img src="" alt="" />
-          <div className="bookingInfo">
-              <h3>Khách sạn ABC</h3>
-              <span>Thành phố Hồ Chí Minh, Quận 2</span>
-              <span>Loại phòng: Phòng đôi</span>
-              <span>Thời gian nhận phòng:12h-07/11/2023</span>
-              <span>Thời gian trả phòng:12h-08/11/2023</span>
+      {loading  ? "Loading" : (
+          <div className="bookingContainer">
+            {data.map((reservation)=>(
+              <div className="bookingItem">
+              <img src={reservation.img || ""} alt="" />
+              <div className="bookingInfo">
+                  <h3>{reservation.hotelName}</h3>
+                  <span>{reservation.address}, {CityFormat(reservation.city)}</span>
+                  <span>Số phòng:  
+                    {reservation.roomNumbers.map((room)=>(<span> {room} </span>))}
+                  </span>
+                  <span>{`Ngày nhận phòng : ${format(new Date(reservation.startDate),"dd/MM/yyyy")}`}</span>
+                  <span>{`Ngày trả phòng : ${format(new Date(reservation.endDate),"dd/MM/yyyy")}`}</span>
+                  <span>Số người: {reservation.people}</span>
+              </div>
+              <div className="bookingPrice">
+                <span>Tuyệt vời</span>
+                {reservation.rating && <button>{reservation.rating}</button>}
+                <span className='siPrice'>VNĐ {currencyFormat(reservation.price)}</span>
+              </div>
+            </div>
+            ))}
           </div>
-          <div className="bookingPrice">
-            <span>Tuyệt vời</span>
-            <button>8.9</button>
-            <span className='siPrice'>VNĐ {currencyFormat(500000)}</span>
-          </div>
-        </div>
-        <div className="bookingItem">
-          <img src="" alt="" />
-          <div className="bookingInfo">
-              <h3>Khách sạn ABC</h3>
-              <span>Thành phố Hồ Chí Minh, Quận 2</span>
-              <span>Loại phòng: Phòng đôi</span>
-              <span>Thời gian nhận phòng:12h-07/11/2023</span>
-              <span>Thời gian trả phòng:12h-08/11/2023</span>
-          </div>
-          <div className="bookingPrice">
-            <span>Tuyệt vời</span>
-            <button>8.9</button>
-            <span className='siPrice'>VNĐ {currencyFormat(500000)}</span>
-          </div>
-        </div>
-      </div>
+      )}
       <Footer/>
     </div>
   )

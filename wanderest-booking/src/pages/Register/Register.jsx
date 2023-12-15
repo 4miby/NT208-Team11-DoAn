@@ -16,7 +16,6 @@ const Register = () => {
   const [info, setInfo] = useState({});
   const handleChange = (e)=>{
     setInfo((prev)=>({...prev, [e.target.id]:e.target.value}))
-    console.log(info);
   }
   const handleSubmit = async(e)=>{
     e.preventDefault();

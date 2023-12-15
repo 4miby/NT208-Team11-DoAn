@@ -18,13 +18,14 @@ const NewRoom = () => {
   // Xử lý nhập liệu
   const handleChange = (e)=>{
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    console.log(hotelId);
   }
   // Xử lý khi bấm nút gửi
   const handleClick = async e=>{
     e.preventDefault();
     const roomNumbers = rooms.split(",").map(room=>({number:room}))
     try{
-        await axios.post(`/rooms/${hotelId}`,{...info, roomNumbers})
+        await axios.post(`/rooms/${hotelId}` ,{...info, roomNumbers})
         .then((respone)=>{
           toast.success(respone.data, {position:'top-right'});
           navigate("/");

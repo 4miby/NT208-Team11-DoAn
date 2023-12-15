@@ -46,7 +46,7 @@ export const updateRoomAvailability = async(req,res,next)=>{
     next(err);
   }
 }
-//DELETE ROOM
+//DELETE ROOM 
 export const deleteRoom = async(req,res,next)=>{
   const hotelId = req.params.hotelId;
   try{

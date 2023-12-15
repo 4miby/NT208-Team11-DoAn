@@ -6,11 +6,31 @@ import useFetch from "../../hooks/useFetch";
 import { currencyFormat } from "../../utils/CurrencyFormat";
 import { SearchContext } from "../../context/SearchContext";
 import axios from "axios";
-const Reserve = ({ setOpen, hotelId }) => {
+import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom";
+const Reserve = ({ setOpen, hotelId, hotelName, hotelAddress, hotelCity, userId, photo }) => {
+  const navigate = useNavigate();
+  // Biến xử lý id khi chọn phòng
   const [selectedRooms, setSelectedRooms] = useState([]);
+  // Fetch data về tất cả phòng trong 1 hotel
   const {data,loading,error} = useFetch(`/hotels/room/${hotelId}`)
-  const {dates} = useContext(SearchContext);
-
+  // xử dụng SearchContext để lấy dữ liệu truyền từ trang chủ vào
+  const {dates,options} = useContext(SearchContext);
+  // Object sẽ được đẩy vào reservation database
+  const [reserve, setReserve] = useState({
+    hotelName: hotelName,
+    address: hotelAddress,
+    city: hotelCity,
+    startDate: dates[0].startDate,
+    endDate: dates[0].endDate,
+    people: options.adult + options.children,
+    img:photo
+  });
+  // Biến xử lý số phòng khi chọn phòng
+  const [rooms, setRooms] = useState([]);
+  // Biến xử lý giá tiền khi chọn phòng
+  const [totalPrice, settotalPrice] = useState(0);
+  // Hàm lấy các ngày giữa 2 ngày
   const getDatesInRange = (startDay,endDay)=>{
     const start = new Date(startDay);
     const end = new Date(endDay);
@@ -23,10 +43,10 @@ const Reserve = ({ setOpen, hotelId }) => {
     }
     return list
   };
-
+  
   const allDates = getDatesInRange(dates[0].startDate, dates[0].endDate);
-  //console.log(allDates);
 
+  // Hàm kiểm tra xem phòng còn trống hay không
   const isAvailable = (roomNumber)=>{
     const isFound = roomNumber.unavailableDates.some((date) =>
     allDates.includes(new Date(date).getTime())
@@ -38,16 +58,36 @@ const Reserve = ({ setOpen, hotelId }) => {
   const handleSelect=(e)=>{
       const checked = e.target.checked;
       const value = e.target.value;
-      setSelectedRooms(checked ? [...selectedRooms,value]: selectedRooms.filter((item)=>item !== value))
+      const roomNumber = e.target.getAttribute('data-room-number')
+      const price = e.target.getAttribute('data-price')
+      // Ép kiểu sang int
+      const numberValue = parseInt(price, 10) || 0;
+      // Xử lý id để add dô unavailableday
+      setSelectedRooms(checked ? [...selectedRooms,value]: selectedRooms.filter((item)=>item !== value));
+      // Xử lý số phòng để add dô reservation
+      setRooms(checked ? [...rooms,roomNumber]: rooms.filter((item)=>item !== roomNumber))
+      // Xử lý giá tiền để add dô reservation
+      settotalPrice(checked ? totalPrice + numberValue : totalPrice - numberValue);
   }
   //Xử lý khi đặt phòng
   const handleClick = async()=>{
     try{
+     // Thực hiện post ngày vào từng id của room đã chọn
       await Promise.all(selectedRooms.map(roomId=>{
         const res = axios.put(`/rooms/availability/${roomId}`
         ,{dates:allDates});
-        return res.data;
+    //    return res.data;
       }))
+      const newReserv = {
+        ...reserve,
+        roomNumbers: rooms,
+        price: totalPrice
+      }
+      await axios.post(`/reservations/${userId}`, newReserv)
+      .then((respone)=>{
+        toast.success(respone.data, {position:'top-right'});
+        navigate("/");
+      })
     }
     catch(err)
     {
@@ -73,7 +113,9 @@ const Reserve = ({ setOpen, hotelId }) => {
               {item.roomNumbers.map((roomNumber)=>(
                 <div className="room">
                   <label>{roomNumber.number}</label>
-                  <input type="checkbox" 
+                  <input type="checkbox"
+                  data-room-number = {roomNumber.number}
+                  data-price = {item.price} 
                   value={roomNumber._id}
                   disabled={!isAvailable(roomNumber)} 
                   onChange={handleSelect}/>

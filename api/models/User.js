@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema({
   img:{
     type:String
   },
-  bookings:{
+  reservations:{
     type:[String]
   },
   isAdmin: {

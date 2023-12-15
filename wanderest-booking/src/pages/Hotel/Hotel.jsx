@@ -117,7 +117,14 @@ const Hotel = () => {
           </div>
         </div>
       </div>)}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
+      {openModal && <Reserve setOpen={setOpenModal} 
+      hotelId={id} 
+      hotelName={data.name} 
+      hotelAddress={data.address}
+      hotelCity={data.city}
+      userId={user._id}
+      photo = {data.photos[0]}
+      />}
       <Footer/>
     </div>
   )

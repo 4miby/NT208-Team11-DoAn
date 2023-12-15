@@ -4,6 +4,7 @@ import { faLocationDot} from '@fortawesome/free-solid-svg-icons'
 import './sale.css'
 import useFetch from "../../hooks/useFetch"
 import { currencyFormat } from '../../utils/CurrencyFormat'
+import { CityFormat } from '../../utils/CityFormat'
 import { useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
 const Sale = () => {
@@ -49,7 +50,7 @@ const Sale = () => {
 
             <div className='address-container'>
             <FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon>
-            <p>{item.address}, {item.city}</p>
+            <p>{item.address}, {CityFormat(item.city)}</p>
             </div>
             <p>{item.title}</p>
             <p className='price'>VNĐ {currencyFormat(item.cheapestPrice)} / Đêm</p>
