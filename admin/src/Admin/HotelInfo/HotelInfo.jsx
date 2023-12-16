@@ -14,6 +14,7 @@ const HotelInfo = () => {
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
   const {data, loading, error} = useFetch(`/hotels/find/${id}`);
+  
   const [img, setImg] = useState();
   useEffect(()=>{
     if (data.photos && data.photos.length > 0) {
@@ -22,6 +23,7 @@ const HotelInfo = () => {
       setImg("https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg");
     }
   },[data])
+
   const handleChange = (e)=>{
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   }
@@ -87,7 +89,7 @@ const HotelInfo = () => {
                 />
               </div>
               <div className="formInput">
-                  <label htmlFor="">{data.name}</label>
+                  <label htmlFor="">Hotel Name</label>
                   <input
                   type="text"
                   id="name"

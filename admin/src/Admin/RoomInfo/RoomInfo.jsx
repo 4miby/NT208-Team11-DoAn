@@ -1,172 +1,88 @@
-import React from "react";
-import './HotelInfo.scss'
-import Sidebar from "../components/Sidebar/sidebar";
-import Navbar from "../components/Navbar/navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState, useEffect } from "react";
+import Navbar from "../components/Navbar/navbar";
+import Sidebar from "../components/Sidebar/sidebar";
+import { useState } from "react";
+import axios from "axios";
 import useFetch from "../../hooks/useFetch";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from 'axios';
+import {useNavigate, useParams} from "react-router-dom";
 import toast from "react-hot-toast";
+import './RoomInfo.scss'
 const RoomInfo = () => {
   const navigate = useNavigate();
   const {id} = useParams();
-  const [files, setFiles] = useState("");
-  const [info, setInfo] = useState({});
-  const {data, loading, error} = useFetch(`/hotels/find/${id}`);
-  const [img, setImg] = useState();
-  useEffect(()=>{
-    if (data.photos && data.photos.length > 0) {
-      setImg(data.photos[0]);
-    } else {
-      setImg("https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg");
-    }
-  },[data])
+  const {data, loading, error} = useFetch(`/rooms/${id}`);
+  const [info,setInfo] = useState({});
+  const [rooms,setRooms] = useState([]);
   const handleChange = (e)=>{
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   }
-  const handleClick= async (e)=>{
-      e.preventDefault();
-      try{
-        // Duyệt qua từng ảnh để trả về một mảng url
-        const  list = await Promise.all
-        (Object.values(files).map
-        (async (file)=>{
-            const data = new FormData();
-            data.append("file",file);
-            data.append("upload_preset","upload");
-            const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/amiby/image/upload",data);
-            const {url} = uploadRes.data;
-            return url;
-        })
-        );
-        const newHotel = {
-          ...info,
-          photos:list
-        };
-        await axios.put(`/hotels/${id}`, newHotel)
-        .then((respone)=>{
-          toast.success(respone.data, {position:'top-right'});
-          navigate("/");
-        })
-      }catch(err){
-        console.log(err);
-      }
+  const handleClick = async(e)=>{
+    e.preventDefault();
+    const roomNumbers = rooms.split(",").map(room=>({number:room}));
+    try{
+      await axios.put(`/rooms/${id}` ,{...info, roomNumbers})
+      .then((respone)=>{
+        toast.success(respone.data, {position:'top-right'});
+        navigate("/");
+      })
+    }catch(err){
+      console.log(err);
+    }
   }
-  return (
+  return(
     <div className="new">
-      <Sidebar/>
+      <Sidebar />
       <div className="newContainer">
-        <Navbar/>
+        <Navbar />
         <div className="top">
-          <h1>{data.name}</h1>
+          <h1>{data._id} Room Info</h1>
         </div>
-          <div className="bottom">
-          <div className="left">
-            <img
-              src={
-                files
-                  ? URL.createObjectURL(files[0])
-                  : img
-              }
-              alt=""
-            />
-          </div>
+        <div className="bottom">
           <div className="right">
-            <form>
-              <div className="formInput">
-                <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  multiple
-                  onChange={(e)=>setFiles(e.target.files)}
-                  style={{ display: "none" }}
-                />
-              </div>
-              <div className="formInput">
-                  <label htmlFor="">{data.name}</label>
-                  <input
-                  type="text"
-                  id="name"
-                  onChange={handleChange}
-                  placeholder={data.name}
-                  />
-              </div>
-              <div className="formInput">
-                  <label htmlFor="">Type</label>
-                  <input
-                  type="text"
-                  id="type"
-                  onChange={handleChange}
-                  placeholder={data.type}
-                  />
-              </div>
-              <div className="formInput">
-                  <label htmlFor="">City</label>
-                  <input
-                  type="text"
-                  id="city"
-                  onChange={handleChange}
-                  placeholder={data.city}
-                  />
-              </div>
-              <div className="formInput">
-                  <label htmlFor="">Address</label>
-                  <input
-                  type="text"
-                  id="address"
-                  onChange={handleChange}
-                  placeholder={data.address}
-                  />
-              </div>
-              <div className="formInput">
-                  <label htmlFor="">distance</label>
-                  <input
-                  type="number"
-                  id="distance"
-                  onChange={handleChange}
-                  placeholder={data.distance}
-                  />
-              </div>
+              <form action="">
               <div className="formInput">
                   <label htmlFor="">Title</label>
                   <input
                   type="text"
                   id="title"
                   onChange={handleChange}
-                  placeholder={data.title}
                   />
               </div>
               <div className="formInput">
-                  <label htmlFor="">Description</label>
+                  <label htmlFor="">Descriptions</label>
                   <input
                   type="text"
                   id="desc"
                   onChange={handleChange}
-                  placeholder={data.desc}
                   />
               </div>
               <div className="formInput">
                   <label htmlFor="">Price</label>
                   <input
-                  type="number"
-                  id="cheapestPrice"
+                  type="Number"
+                  id="price"
                   onChange={handleChange}
-                  placeholder={data.cheapestPrice}
                   />
               </div>
               <div className="formInput">
-                  <label>Fetured</label>
-                  <select id="featured" onChange={handleChange}>
-                    <option value={false}>No</option>
-                    <option value={true}>Yes</option>
-                  </select>
-                </div>
+                  <label htmlFor="">Max people</label>
+                  <input
+                  type="number"
+                  id="maxPeople"
+                  onChange={handleChange}
+                  />
+              </div>
+              <div className="formInput">
+                  <label>Rooms</label>
+                  <textarea placeholder="give comma beetween room number"
+                  onChange={e=>setRooms(e.target.value)}
+                  ></textarea>
+              </div>
+          
               <button onClick={handleClick}>Update</button>
-            </form>
+
+              </form>
+              
           </div>
         </div>
       </div>

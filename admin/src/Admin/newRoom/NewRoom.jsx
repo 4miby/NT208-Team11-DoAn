@@ -18,7 +18,6 @@ const NewRoom = () => {
   // Xử lý nhập liệu
   const handleChange = (e)=>{
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-    console.log(info);
   }
   // Xử lý khi bấm nút gửi
   const handleClick = async e=>{

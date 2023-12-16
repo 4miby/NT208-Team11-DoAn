@@ -24,7 +24,7 @@ export const createRoom = async(req,res,next)=>{
 export const updateRoom = async(req,res,next)=>{
   try{
     const updatedRoom = await Room.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true})
-    res.status(200).json(updatedRoom);
+    res.status(200).json("Đã thay đổi thông tin của phòng");
   }
   catch(err){
     next(err);

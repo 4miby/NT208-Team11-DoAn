@@ -12,6 +12,7 @@ import { userInputs } from './formsource';
 import NewHotel from './Admin/NewHotel/NewHotel';
 import NewRoom from './Admin/newRoom/NewRoom';
 import HotelInfo from './Admin/HotelInfo/HotelInfo';
+import RoomInfo from './Admin/RoomInfo/RoomInfo';
 function App() {
   const ProtectedRoute = ({children}) =>{
     const {user} = useContext(AuthContext);
@@ -74,7 +75,7 @@ function App() {
             />
             <Route path='rooms/:id'
             element = {<ProtectedRoute>
-              <HotelInfo></HotelInfo>
+              <RoomInfo/>
             </ProtectedRoute>}
             />
         </Route>
