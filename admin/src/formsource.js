@@ -32,6 +32,11 @@ export const userInputs = [
     label: "Ngày sinh",
     type: "date",
   },
+  {
+    id:"GT",
+    label:"Gender",
+    type:"date"
+  }
 ];
 
 export const hotelInputs = [
@@ -62,7 +67,7 @@ export const hotelInputs = [
   {
     id: "distance",
     label: "Distance from City Center",
-    type: "text",
+    type: "number",
     placeholder: "500",
   },
   {

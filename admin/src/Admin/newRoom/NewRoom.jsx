@@ -18,7 +18,7 @@ const NewRoom = () => {
   // Xử lý nhập liệu
   const handleChange = (e)=>{
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-    console.log(hotelId);
+    console.log(info);
   }
   // Xử lý khi bấm nút gửi
   const handleClick = async e=>{
@@ -66,10 +66,14 @@ const NewRoom = () => {
               </div>
               <div className="formInput" >
                   <label>Choose a hotel</label>
-                  <select id="hotelId" onChange={e=>setHotelId(e.target.value)}>
+                  <select id="hotelId" onChange={(e)=>{
+                    setInfo({...info,hotelId:e.target.value})
+                    setHotelId(e.target.value)}}
+                  >
                     {loading ? "loading" : data && data.map(hotel=>(
                       <option key={hotel.id} 
-                      value={hotel._id}>
+                      value={hotel._id}
+                      >
                         {hotel.name}
                       </option>
                     ))}

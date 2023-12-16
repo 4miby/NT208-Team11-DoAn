@@ -15,7 +15,7 @@ export const createHotel = async(req, res, next)=>{
 export const updateHotel = async(req,res,next)=>{
   try{
     const updatedHotel = await Hotel.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true})
-    res.status(200).json(updatedHotel);
+    res.status(200).json("Đã thay đổi thông tin khách sạn");
   }
   catch(err){
     next(err);

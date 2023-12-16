@@ -1,5 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 const RoomSchema = new mongoose.Schema({
+  hotelId:{
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "Hotel",
+  },
   title:{
     type:String,
     required: true,

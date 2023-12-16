@@ -11,7 +11,7 @@ import { hotelColumns, roomColumns, userColumns } from './datatablesource';
 import { userInputs } from './formsource';
 import NewHotel from './Admin/NewHotel/NewHotel';
 import NewRoom from './Admin/newRoom/NewRoom';
-
+import HotelInfo from './Admin/HotelInfo/HotelInfo';
 function App() {
   const ProtectedRoute = ({children}) =>{
     const {user} = useContext(AuthContext);
@@ -40,6 +40,13 @@ function App() {
               <New inputs={userInputs} title="Add New User" />
             </ProtectedRoute>}
             />
+          <Route path='users/:id'
+            element = {<ProtectedRoute>
+              <Info inputs={userInputs}/>
+            </ProtectedRoute>}
+          />
+
+         
           
           <Route path='hotels' 
           element={<ProtectedRoute>
@@ -48,6 +55,11 @@ function App() {
           <Route path='hotels/new'
             element = {<ProtectedRoute>
               <NewHotel/>
+            </ProtectedRoute>}
+            />
+            <Route path='hotels/:id'
+            element = {<ProtectedRoute>
+              <HotelInfo></HotelInfo>
             </ProtectedRoute>}
             />
 
@@ -60,11 +72,11 @@ function App() {
               <NewRoom/>
             </ProtectedRoute>}
             />
-
-          <Route path='info'
-          element={<ProtectedRoute>
-            <Info/>
-          </ProtectedRoute>}/>
+            <Route path='rooms/:id'
+            element = {<ProtectedRoute>
+              <HotelInfo></HotelInfo>
+            </ProtectedRoute>}
+            />
         </Route>
       </Routes>
       

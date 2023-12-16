@@ -30,7 +30,7 @@ const List = () => {
             <h1 className='lsTitle'>Search</h1>
             <div className='lsItem'>
               <label>Địa điểm</label>
-              <input type="text" placeholder={destination}/>
+              <input type="text" placeholder={destination} onChange={(e)=>setDestination(e.target.value)}/>
             </div>
             <div className='lsItem'>
               <label>Ngày đặt phòng</label>

@@ -60,13 +60,8 @@ const Sidebar = () => {
                     <NotificationsNoneOutlinedIcon className="icon"/>
                     <span>Notifications</span>
                 </li>
-                <p className="title">USER</p>
-                <Link to="/info" style={{textDecoration: "none"}}>
-                <li>
-                    <AccountCircleIcon className="icon"/>
-                    <span>Profile</span>
-                </li>
-                </Link>
+                <p className="title">LOGOUT</p>
+                
                 <li>
                     <ExitToAppIcon className="icon"/>
                     <span onClick={handleClick}>Logout</span>

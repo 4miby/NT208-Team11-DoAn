@@ -13,19 +13,12 @@ const Datatable = ({columns}) => {
 
   useEffect(() => {
     setList(data);
-    console.log(data);
   },[data]);
 
   const handleDelete = async (id) => {
     try {
-      if(path === "rooms")
-      {
-        await axios.delete(`/${path}/${id}/`);
-      }
-      else{
         await axios.delete(`/${path}/${id}`);
-      }
-      setList(list.filter((item) => item._id !== id));
+        setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };
 
@@ -37,7 +30,7 @@ const Datatable = ({columns}) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to={`/${path}/single`} style={{ textDecoration: "none" }}>
+            <Link to={`/${path}/${params.row._id}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div

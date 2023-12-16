@@ -10,15 +10,19 @@ const New = ({ inputs, title }) => {
   const navigate = useNavigate();
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
+  // Xử lý nhập liệu
   const handleChange = (e)=>{
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   }
+  // Xử lý bấm nút gửi
   const handleClick = async e=>{
     e.preventDefault();
+    // Tạo Form data để gửi ảnh
     const data = new FormData();
     data.append("file",file);
     data.append("upload_preset","upload");
     try{
+      // Post ảnh lên cloudinary và nhận về url
       const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/amiby/image/upload",data);
       const {url} = uploadRes.data
 
@@ -26,6 +30,7 @@ const New = ({ inputs, title }) => {
         ...info,
         img:url
       }
+      // Post new user lên database
       await axios.post("/auth/register", newUser)
       .then((respone)=>{
         toast.success(respone.data, {position:'top-right'});
@@ -35,7 +40,6 @@ const New = ({ inputs, title }) => {
       console.log(err);
     }
   };
-  console.log(info);
   return (
     <div className="new">
       <Sidebar />

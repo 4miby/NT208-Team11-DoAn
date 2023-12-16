@@ -12,12 +12,7 @@ const Infor = () => {
   
 
   const {data, loading, error} = useFetch(`/users/${id}`);
-  const [user, setUser] = useState({
-    address: undefined,
-    phoneNumber: undefined,
-    GT: undefined,
-    Birth: undefined,
-  });
+  const [user, setUser] = useState({});
   // Kiểm tra user đã có ảnh hay chưa
   const [img,setImg] = useState();
   useEffect(()=>{
@@ -27,12 +22,8 @@ const Infor = () => {
   // Xử lý nhập dữ liệu
   const inputChangeHandler = (e)=>{
     const {name,value} = e.target;
-    setUser({...user,[name]:value})
-  }
-  // Xử lý nhập ngày sinh
-  const handleSelect = (e)=>{
-    const {name,value} = e.target;
-    setUser({...user,[name]:value})
+    setUser({...user,[name]:value});
+    console.log(user);
   }
   // Xu ly khi bam nut update
   const handleClick = async(e)=>{
@@ -42,6 +33,7 @@ const Infor = () => {
     datafile.append("upload_preset","upload");
     
     try{
+
       const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/amiby/image/upload",datafile);
       console.log(uploadRes.data);
       const {url} = uploadRes.data;
@@ -110,13 +102,15 @@ const Infor = () => {
               </div>
               <div className='changeItem'>
                 <label>Giới tính</label>
-                <input className='Ngày sinh' name="GT"
-                placeholder={data.GT || ""}
-                onChange={inputChangeHandler}></input>
+                <select name="GT" onChange={inputChangeHandler}>
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                    <option value="Không xác định">Không xác định</option>
+                  </select>
               </div>
               <div className='changeItem'>
                 <label>Ngày sinh</label>
-                <input type='date' onChange={handleSelect} name='Birth' placeholder={data.Birth}></input>
+                <input type='date' onChange={inputChangeHandler} name='Birth'></input>
               </div>
               <button onClick={handleClick}>Thay đổi thông tin</button>
             </form>

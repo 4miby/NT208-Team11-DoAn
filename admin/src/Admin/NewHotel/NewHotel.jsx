@@ -12,18 +12,10 @@ const NewHotel = () => {
   const navigate = useNavigate();
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
- // const [rooms, setRooms] = useState([]);
-  const {data,loading,error} = useFetch("/rooms");
   // Xử lý khi nhập liệu
   const handleChange = (e)=>{
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   }
-  // Xử lý khi chọn loại phòng
-  // const handleSelect = e=>{
-  //   const value = Array.from(e.target.selectedOptions, options=>options.value);
-  // //  setRooms(value);
-  // }
-  // Xử lý khi bấm nút gửi
   const handleClick = async e=>{
     e.preventDefault();
     try{
@@ -41,7 +33,6 @@ const NewHotel = () => {
       );
       const newHotel = {
         ...info,
-      //  rooms,
         photos:list
       };
       await axios.post("/hotels", newHotel)
@@ -50,7 +41,7 @@ const NewHotel = () => {
         navigate("/");
       })
     }catch(err){
-
+      console.log(err);
     }
   };
 
@@ -105,14 +96,6 @@ const NewHotel = () => {
                     <option value={false}>No</option>
                     <option value={true}>Yes</option>
                   </select>
-                </div>
-                <div className="selectRooms">
-                  <label>Rooms</label>
-                  {/* <select id="rooms" multiple  onChange={handleSelect}>
-                    {loading ? "loading" : data && data.map(room=>(
-                      <option key={room._id} value={room._id}>{room.title}</option>
-                    ))}
-                  </select> */}
                 </div>
               <button onClick={handleClick}>Send</button>
             </form>
