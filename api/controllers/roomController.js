@@ -30,6 +30,7 @@ export const updateRoom = async(req,res,next)=>{
     next(err);
   }
 }
+// UPDATE ROOM khi đặt phòng
 export const updateRoomAvailability = async(req,res,next)=>{
   try {
     await Room.updateOne(

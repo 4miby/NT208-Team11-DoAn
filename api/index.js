@@ -28,7 +28,7 @@ app.use("/api/users",usersRoute);
 app.use("/api/hotels",hotelsRoute);
 app.use("/api/rooms",roomsRoute);
 app.use("/api/reservations",reservationsRoute);
-
+// middleware với next để xử lý lỗi
 app.use((err,req, res, next) => {
   const errorStatus = err.status || 500
   const errorMessage = err.message || "Something went wrong!!"

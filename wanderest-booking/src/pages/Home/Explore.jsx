@@ -11,7 +11,9 @@ import { SearchContext } from '../../context/SearchContext'
 const Explore = () => {
   const navigate = useNavigate();
   const [destination,setDestination] = useState("");
+  // Lấy dữ liệu số lượng dịch vụ ở các thành phố
   const {data,loading, error} = useFetch("/hotels/countbycity?cities=HaNoi,HCM,DaNang,NhaTrang,DaLat");
+
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
@@ -24,6 +26,7 @@ const Explore = () => {
     children:0,
     room:1
   })
+  
   const {dispatch} = useContext(SearchContext);
   const handleClick = ()=>{ 
     dispatch({type:"NEW_SEARCH",payload:{destination,dates,options}})

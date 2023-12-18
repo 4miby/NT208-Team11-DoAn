@@ -41,7 +41,7 @@ const Searchbar = () => {
   }
 
   const {dispatch} = useContext(SearchContext);
-
+  //Sử dụng SearchContext để khởi tạo dữ liệu tìm kiếm và gửi sang page khác
   const handleSearch = ()=>{
     dispatch({type:"NEW_SEARCH",payload:{destination,dates,options}})
     navigate("/hotels", {state:{destination, dates, options}})

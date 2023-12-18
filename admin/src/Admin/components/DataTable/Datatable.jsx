@@ -7,14 +7,14 @@ import axios from 'axios';
 
 const Datatable = ({columns}) => {
   const location = useLocation();
+  // Tách path để lấy giá trị
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState([]);
   const { data, loading, error } = useFetch(`/${path}`);
-
   useEffect(() => {
     setList(data);
   },[data]);
-
+  // Xử lý khi xóa 
   const handleDelete = async (id) => {
     try {
         await axios.delete(`/${path}/${id}`);

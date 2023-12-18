@@ -5,6 +5,7 @@ const BackgrounSlider = ({imageslide}) => {
   const imageSlide = imageslide;
 
   const [currentState, setCurrentState] = useState(0);
+  // Set mỗi 5s đổi ảnh
   useEffect(()=>
   {
     setTimeout(()=>
@@ -19,13 +20,13 @@ const BackgrounSlider = ({imageslide}) => {
       }
     },5000);
   })
-
+  // Style của background
   const bgImagestyle = {
     backgroundImage:`url(${imageSlide[currentState]})`,
     backgroundSize:'cover',
     height: '100vh',
   }
-  
+  // Xử lý bấm nút
   const gotoNext= (currentState)=>
   {
     setCurrentState(currentState);

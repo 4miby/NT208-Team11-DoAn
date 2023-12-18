@@ -22,8 +22,10 @@ const NewRoom = () => {
   // Xử lý khi bấm nút gửi
   const handleClick = async e=>{
     e.preventDefault();
+    // Tách dữ liệu số phòng sau mỗi dấu ,
     const roomNumbers = rooms.split(",").map(room=>({number:room}))
     try{
+      // Thực hiện post newroom lên database
         await axios.post(`/rooms/${hotelId}` ,{...info, roomNumbers})
         .then((respone)=>{
           toast.success(respone.data, {position:'top-right'});

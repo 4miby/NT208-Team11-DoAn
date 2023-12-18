@@ -13,13 +13,17 @@ const RoomInfo = () => {
   const {data, loading, error} = useFetch(`/rooms/${id}`);
   const [info,setInfo] = useState({});
   const [rooms,setRooms] = useState([]);
+  // Xử lý nhập liệu
   const handleChange = (e)=>{
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   }
+  // Xử lý khi bấm nút update
   const handleClick = async(e)=>{
     e.preventDefault();
+    // tách phòng
     const roomNumbers = rooms.split(",").map(room=>({number:room}));
     try{
+      //Thực hiện post dữ liệu
       await axios.put(`/rooms/${id}` ,{...info, roomNumbers})
       .then((respone)=>{
         toast.success(respone.data, {position:'top-right'});

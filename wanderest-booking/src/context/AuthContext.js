@@ -5,9 +5,9 @@ const INITIAL_STATE = {
   loading: false,
   error: null,
 };
-
+// Tạo ra context với trạng thái khởi đầu 
 export const AuthContext = createContext(INITIAL_STATE);
-
+// Sử dụng Reducer để thực hiện các thay đổi với initial_state
 const AuthReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_START":

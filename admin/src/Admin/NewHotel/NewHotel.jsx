@@ -19,7 +19,7 @@ const NewHotel = () => {
   const handleClick = async e=>{
     e.preventDefault();
     try{
-      // Duyệt qua từng ảnh để trả về một mảng url
+      // Post từng ảnh để trả về một mảng url
       const  list = await Promise.all
       (Object.values(files).map
       (async (file)=>{
@@ -31,10 +31,12 @@ const NewHotel = () => {
           return url;
       })
       );
+      // Thêm mảng url vào dữ liệu sẽ gửi vào database
       const newHotel = {
         ...info,
         photos:list
       };
+      // Thực hiện việc post dữ liệu lên database
       await axios.post("/hotels", newHotel)
       .then((respone)=>{
         toast.success(respone.data, {position:'top-right'});

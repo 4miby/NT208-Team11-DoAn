@@ -12,8 +12,8 @@ import axios from 'axios'
 const Navbar = () => {
   const navigate = useNavigate();
   const [isDrop,setIsDrop]= useState(false);
+  // sử dụng authcontext để lấy dữ liệu user đang đăng nhập
   const {user,dispatch} = useContext(AuthContext);
-  // Hàm xóa trường dữ liệu trong cookie
 // Xử lý khi bấm vào nút đăng nhập
   const handleSignIn =()=>{
       navigate("/login")
