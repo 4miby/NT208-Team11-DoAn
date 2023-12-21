@@ -14,6 +14,7 @@ export const createHotel = async(req, res, next)=>{
     next(err); 
   }
 }
+
 //UPDATE: Cập nhật thông tin của một khách sạn
 export const updateHotel = async(req,res,next)=>{
   try{
@@ -26,6 +27,7 @@ export const updateHotel = async(req,res,next)=>{
     next(err);
   }
 }
+
 // DELETE: Xóa một khách sạn và các phòng liên quan
 export const deleteHotel = async(req,res,next)=>{
   try{
@@ -45,6 +47,7 @@ export const deleteHotel = async(req,res,next)=>{
     next(err);
   }
 }
+
 //GET ONE HOTEL : Lấy thông tin của một khách sạn theo ID
 export const getHotel = async(req,res,next)=>{
   try{
@@ -57,6 +60,7 @@ export const getHotel = async(req,res,next)=>{
     next(err);
   }
 }
+
 //GET ALL HOTEL: Lấy danh sách các khách sạn dựa trên các tham số truy vấn
 export const getAllHotel = async(req,res,next)=>{
   const { min, max,limit, ...others } = req.query;
@@ -73,6 +77,7 @@ export const getAllHotel = async(req,res,next)=>{
     next(err);
   }
 }
+
 // Count by City: Đếm số lượng khách sạn theo từng thành phố
 export const countbyCity = async(req,res,next)=>{
   // Tách các thành phố dựa vào query
@@ -89,6 +94,7 @@ export const countbyCity = async(req,res,next)=>{
     next(err);
   }
 }
+
 // GET HOTEL ROOMS: Lấy danh sách tất cả các phòng từ ID của một khách sạn
 export const getHotelRooms = async (req, res, next) => {
   try {
