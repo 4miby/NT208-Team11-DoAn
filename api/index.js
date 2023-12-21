@@ -10,7 +10,7 @@ import cookieParser from "cookie-parser";
 const app = express();
 dotenv.config();
 
-
+// Hàm kết nối tới MongoDB
 const connect = async()=>{
   try {
     await mongoose.connect(process.env.MONGO);
@@ -40,15 +40,18 @@ app.use((err,req, res, next) => {
   });
 })
 
+//
 mongoose.connection.on("disconnect",()=>{
   console.log("mongoDB disconnected!")
 })
+
+//
 mongoose.connection.on("connected",()=>{
   console.log("mongoDB connected!")
 })
 
 
-
+// Kết nối tới backend bằng port 8800
 app.listen(8800,()=>{
   connect();
   console.log("Connected to backend")

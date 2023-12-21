@@ -34,6 +34,7 @@ const ResetPassword = () => {
   const handleSubmit = async(e)=>{
     e.preventDefault();
     try{
+      // post data để yêu cầu reset pass
       await axios.post("/auth/resetPassword",info)
       .then((respone)=>{
         toast.success(respone.data, {position:'top-right'});

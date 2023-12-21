@@ -15,7 +15,7 @@ export const register =  async(req,res,next)=>{
         ...req.body,
         password:hash
       })
-      // Lưu vào database
+      // Lưu thông tin đăng ký vào database
       await newUser.save();
       res.status(200).json("Đã tạo thành công người dùng mới!");
   }
@@ -48,6 +48,7 @@ export const login =  async(req,res,next)=>{
     next(err);
   }
 }
+
 // Đăng xuất
 export const logout = (req,res,next)=>{
   try{
@@ -58,6 +59,7 @@ export const logout = (req,res,next)=>{
     next(err);
   }
 }
+
 // Yêu cầu reset password
 export const requestReset = async (req,res,next)=>{
   try{

@@ -26,7 +26,7 @@ const BackgrounSlider = ({imageslide}) => {
     backgroundSize:'cover',
     height: '100vh',
   }
-  // Xử lý bấm nút
+  // Xử lý bấm nút chuyển slide
   const gotoNext= (currentState)=>
   {
     setCurrentState(currentState);

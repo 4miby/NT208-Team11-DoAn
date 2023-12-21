@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {useState} from 'react'
 import './Hotel.css'
 import Navbar from '../components/Navbar'
@@ -18,6 +18,7 @@ const Hotel = () => {
   const [openModal, setOpenModal] = useState(false);
   const {data, loading, error} = useFetch(`/hotels/find/${id}`);
   const {user} = useContext(AuthContext);
+  const [days, setDays] = useState()
   const navigate = useNavigate();
 
   const {dates,options} = useContext(SearchContext);
@@ -28,7 +29,16 @@ const Hotel = () => {
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
-  const days = dayDifference(dates[0].endDate ,dates[0].startDate);
+  //
+  useEffect(() => {
+  // Kiểm tra xem biến dates có tồn tại và không phải là undefined
+  if (dates !== undefined && dates.length > 0 && dates[0].endDate && dates[0].startDate) {
+    setDays(dayDifference(dates[0].endDate, dates[0].startDate));
+  } else {
+    // Xử lý trường hợp nếu biến dates không tồn tại hoặc không chứa các thuộc tính endDate và startDate
+    setDays(1);
+  }
+}, [dates]);
   // Xử lý khi bấm vào ảnh
   const handleOpen= (i)=>{
     setSlideNumber(i);
