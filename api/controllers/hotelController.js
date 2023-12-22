@@ -1,6 +1,7 @@
 import Hotel from "../models/Hotel.js"
 import Room from "../models/Room.js"
 // CREATE: Tạo mới một khách sạn
+// BEGIN
 export const createHotel = async(req, res, next)=>{
   // Tạo một đối tượng khách sạn mới từ dữ liệu trong request body
   const newHotel = new Hotel(req.body);  
@@ -14,8 +15,10 @@ export const createHotel = async(req, res, next)=>{
     next(err); 
   }
 }
+//END
 
 //UPDATE: Cập nhật thông tin của một khách sạn
+//BEGIN
 export const updateHotel = async(req,res,next)=>{
   try{
     // Tìm và cập nhật thông tin dựa trên ID và dữ liệu mới từ reqest body
@@ -27,6 +30,7 @@ export const updateHotel = async(req,res,next)=>{
     next(err);
   }
 }
+//END
 
 // DELETE: Xóa một khách sạn và các phòng liên quan
 export const deleteHotel = async(req,res,next)=>{
@@ -47,8 +51,10 @@ export const deleteHotel = async(req,res,next)=>{
     next(err);
   }
 }
+//END
 
-//GET ONE HOTEL : Lấy thông tin của một khách sạn theo ID
+// GET ONE HOTEL : Lấy thông tin của một khách sạn theo ID
+// BEGIN
 export const getHotel = async(req,res,next)=>{
   try{
     // Tìm khách sạn dựa trên ID
@@ -60,8 +66,10 @@ export const getHotel = async(req,res,next)=>{
     next(err);
   }
 }
+// END
 
-//GET ALL HOTEL: Lấy danh sách các khách sạn dựa trên các tham số truy vấn
+// GET ALL HOTEL: Lấy danh sách các khách sạn dựa trên các tham số truy vấn
+// BEGIN
 export const getAllHotel = async(req,res,next)=>{
   const { min, max,limit, ...others } = req.query;
   try {
@@ -77,8 +85,10 @@ export const getAllHotel = async(req,res,next)=>{
     next(err);
   }
 }
+// END
 
 // Count by City: Đếm số lượng khách sạn theo từng thành phố
+// BEGIN
 export const countbyCity = async(req,res,next)=>{
   // Tách các thành phố dựa vào query
   const cities = req.query.cities.split(",")
@@ -94,8 +104,10 @@ export const countbyCity = async(req,res,next)=>{
     next(err);
   }
 }
+// END
 
 // GET HOTEL ROOMS: Lấy danh sách tất cả các phòng từ ID của một khách sạn
+// BEGIN
 export const getHotelRooms = async (req, res, next) => {
   try {
     // Tìm kiếm hotel bằng hotelId
@@ -112,5 +124,6 @@ export const getHotelRooms = async (req, res, next) => {
     next(err);
   }
 };
+// END
 
 

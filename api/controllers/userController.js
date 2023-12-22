@@ -1,6 +1,7 @@
 import Reservation from "../models/Reservation.js";
 import User from "../models/User.js"
 // UPDATE: Cập nhật thông tin người dùng
+// BEGIN
 export const updateUser = async(req,res,next)=>{
   try{
     // Tìm và cập nhật người dùng dựa trên ID và dữ liệu mới từ request body
@@ -11,7 +12,10 @@ export const updateUser = async(req,res,next)=>{
     next(err);// Xử lý lỗi nếu có
   }
 }
-//DELETE: Xóa một người dùng
+// END 
+
+// DELETE: Xóa một người dùng
+// BEGIN
 export const deleteUser = async(req,res,next)=>{
   try{
     await User.findByIdAndDelete(req.params.id) // Xóa người dùng dựa trên ID
@@ -21,7 +25,10 @@ export const deleteUser = async(req,res,next)=>{
     next(err); // Xử lý lỗi nếu có
   }
 }
-//GET ONE USER: Lấy thông tin của một người dùng theo ID
+// END 
+
+// GET ONE USER: Lấy thông tin của một người dùng theo ID
+// BEGIN
 export const getUser = async(req,res,next)=>{
   try{
     const user = await User.findById(req.params.id) // Tìm người dùng dựa trên ID
@@ -31,7 +38,10 @@ export const getUser = async(req,res,next)=>{
     next(err); // Xử lý lỗi nếu có
   } 
 }
+// END
+
 // GET ALL USERS: Lấy danh sách tất cả người dùng
+// BEGIN
 export const getAllUser = async(req,res,next)=>{
   try{
     const users = await User.find(); // Lấy danh sách tất cả người dùng từ cơ sở dữ liệu
@@ -41,8 +51,10 @@ export const getAllUser = async(req,res,next)=>{
     next(err); // Xử lý lỗi nếu có
   }
 }
+// END 
 
 // GET USER RESERVATION: Lấy danh sách đặt chỗ của một người dùng
+// BEGIN
 export const getUserReservations = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id); // Tìm người dùng dựa trên ID
@@ -56,5 +68,5 @@ export const getUserReservations = async (req, res, next) => {
     next(err); // Xử lý lỗi nếu có
   }
 };
-
+// END
 

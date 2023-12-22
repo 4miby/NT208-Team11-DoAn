@@ -1,11 +1,9 @@
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import nodemailer from 'nodemailer';
+// Hàm gửi mail 
 const sendEmail = async (email,link,name) => {
   try {
-    console.log(email);
-    console.log(link);
-    console.log(name);
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com", // SMTP server address (usually mail.your-domain.com)
       port: 465, // Port for SMTP (usually 465)
@@ -15,7 +13,7 @@ const sendEmail = async (email,link,name) => {
         pass: process.env.EMAIL_PASSWORD, // Password (for gmail, your app password)
       },
     });
-    // Define and send message inside transporter.sendEmail() and await info about send from promise:
+    // Gửi mail bao gồm đường link để thực hiện việc reset password
     let info = await transporter.sendMail({
       from: "huyvo6999@gmail.com",
       to: email,
@@ -28,12 +26,13 @@ const sendEmail = async (email,link,name) => {
       `,
     });
   } catch (error) {
+    // Xử lý lỗi nếu có
     return {
       success: false,
       error: error.message,
     };
   }
 };
-
+// END
 
 export default sendEmail;

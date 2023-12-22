@@ -1,6 +1,7 @@
 import Reservation from "../models/Reservation.js";
 import User from "../models/User.js";
 // CREATE: Tạo mới một đặt chỗ (reservation) và liên kết với người dùng
+// BEGIN
 export const createReservation = async(req,res,next)=>{
    // Lấy ID của người dùng từ tham số đường dẫn
    const userId = req.params.userId;
@@ -21,3 +22,4 @@ export const createReservation = async(req,res,next)=>{
     next(err); // Xử lý lỗi nếu có
    }
 }
+// END

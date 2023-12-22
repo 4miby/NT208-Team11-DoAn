@@ -19,6 +19,7 @@ const connect = async()=>{
     throw(error);
   }
 };
+
 // middlewares
 app.use(cookieParser());
 app.use(express.json());

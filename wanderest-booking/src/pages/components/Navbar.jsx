@@ -14,25 +14,33 @@ const Navbar = () => {
   const [isDrop,setIsDrop]= useState(false);
   // sử dụng authcontext để lấy dữ liệu user đang đăng nhập
   const {user,dispatch} = useContext(AuthContext);
-// Xử lý khi bấm vào nút đăng nhập
+
+  // Xử lý khi bấm vào nút đăng nhập
   const handleSignIn =()=>{
-      navigate("/login")
-  }
-  // Xử lý khi bấm vào nút đăng xuất
-  const handleSignOut = async ()=>{
-    dispatch({type:"LOGOUT"});
-    setIsDrop(false);
-    await axios.get("/auth/logout");
-    navigate("/");
-  }
-  const onclickHandle = ()=>
-  {
-    setIsDrop(!isDrop);
+      navigate("/login") // Điều hướng đến page login
   }
 
+  // Xử lý khi bấm vào nút đăng xuất
+  // BEGIN
+  const handleSignOut = async ()=>{
+    dispatch({type:"LOGOUT"}); // Thực hiện action là LOGOUT
+    setIsDrop(false);
+    await axios.get("/auth/logout"); // call api để xóa access_token ra khỏi cookie
+    navigate("/"); // Điều hướng đến trang chủ
+  }
+  // END
+
+  // Xử lý thả drop menu
+  const onclickHandle = ()=>
+  {
+    setIsDrop(!isDrop); 
+  }
+ 
+  // Xử lý khi bấm vào nút Khám phá
   const ExploreClick = ()=>
   {
-    window.scrollTo(
+    // Lướt tới phần khám phá
+    window.scrollTo( 
       {
         top:1200,
         behavior:'smooth'
@@ -40,8 +48,10 @@ const Navbar = () => {
     )
   }
 
+  // Xử lý khi bấm vào nút Phòng
   const RoomClick = ()=>
-  {
+  { 
+    // Lướt tới phần phòng 
     window.scrollTo(
       {
         top:2080,
@@ -49,9 +59,11 @@ const Navbar = () => {
       }
     )
   }
-
+  
+  // Xử lý khi bấm vào nút Dịch vụ
   const ServiceClick = ()=>
   {
+    // Lướt tới Footer
     window.scrollTo(
       {
         top: 2500,

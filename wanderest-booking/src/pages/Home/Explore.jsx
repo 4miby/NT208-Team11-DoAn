@@ -13,7 +13,7 @@ const Explore = () => {
   const [destination,setDestination] = useState("");
   // Lấy dữ liệu số lượng dịch vụ ở các thành phố
   const {data,loading, error} = useFetch("/hotels/countbycity?cities=HaNoi,HCM,DaNang,NhaTrang,DaLat");
-
+  
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
@@ -21,6 +21,7 @@ const Explore = () => {
       key: 'selection'
     }
   ]);
+
   const [options, setOptions] = useState({
     adult:1,
     children:0,

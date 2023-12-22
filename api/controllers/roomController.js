@@ -1,6 +1,7 @@
 import Room from "../models/Room.js";
 import Hotel from "../models/Hotel.js"
 // POST: Tạo mới một phòng và liên kết với một khách sạn
+// BEGIN 
 export const createRoom = async(req,res,next)=>{
   const hotelId = req.params.hotelId; // Lấy ID của khách sạn từ tham số đường dẫn
   const newRoom = new Room(req.body)// Tạo một đối tượng phòng mới từ dữ liệu trong request body
@@ -21,7 +22,10 @@ export const createRoom = async(req,res,next)=>{
     next(err); // Xử lý lỗi nếu có
   }
 }
-//UPDATE:  Cập nhật thông tin của một phòng
+// END
+
+// UPDATE:  Cập nhật thông tin của một phòng
+// BEGIN
 export const updateRoom = async(req,res,next)=>{
   try{
     // Tìm và cập nhật phòng dựa trên ID và dữ liệu mới từ request body
@@ -50,7 +54,10 @@ export const updateRoomAvailability = async(req,res,next)=>{
     next(err); // Xử lý lỗi nếu có
   }
 }
-//DELETE ROOM : Xóa một phòng và cập nhật mảng rooms của khách sạn
+// END
+
+// DELETE ROOM : Xóa một phòng và cập nhật mảng rooms của khách sạn
+// BEGIN
 export const deleteRoom = async(req,res,next)=>{
   const room =  await Room.findById(req.params.id) // Tìm phòng dựa trên ID
   const hotelId = room.hotelId; // Lấy ID của khách sạn mà phòng thuộc về
@@ -64,7 +71,10 @@ export const deleteRoom = async(req,res,next)=>{
     }
     res.status(200).json("Room has been deleted."); // Trả về thông báo xóa phòng
 }
-//GET ONE ROOM: Lấy thông tin của một phòng theo ID
+// END
+
+// GET ONE ROOM: Lấy thông tin của một phòng theo ID
+// BEGIN
 export const getRoom = async(req,res,next)=>{
   try{
     const room = await Room.findById(req.params.id) // Tìm phòng dựa trên ID
@@ -74,7 +84,10 @@ export const getRoom = async(req,res,next)=>{
     next(err); // Xử lý lỗi nếu có
   }
 }
-//GET ALL ROOM: Lấy danh sách tất cả các phòng
+// END
+
+// GET ALL ROOM: Lấy danh sách tất cả các phòng
+// BEGIN
 export const getAllRooms = async(req,res,next)=>{
   try{
     const room = await Room.find(); // Lấy danh sách tất cả các phòng từ cơ sở dữ liệu
@@ -84,5 +97,6 @@ export const getAllRooms = async(req,res,next)=>{
     next(err); // Xử lý lỗi nếu có
   }
 }
+// END
 
 

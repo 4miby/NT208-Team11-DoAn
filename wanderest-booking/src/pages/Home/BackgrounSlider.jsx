@@ -1,11 +1,12 @@
 
 import { useEffect, useState } from 'react'
 import './backgroundslide.css'
-const BackgrounSlider = ({imageslide}) => {
-  const imageSlide = imageslide;
 
-  const [currentState, setCurrentState] = useState(0);
-  // Set mỗi 5s đổi ảnh
+const BackgrounSlider = ({imageslide}) => {
+  const imageSlide = imageslide; 
+
+  const [currentState, setCurrentState] = useState(0); // Tạo ra trạng thái cho slide ảnh xuất hiện
+  // Set mỗi 5s đổi slide ảnh sử dụng useEffect
   useEffect(()=>
   {
     setTimeout(()=>
@@ -20,7 +21,7 @@ const BackgrounSlider = ({imageslide}) => {
       }
     },5000);
   })
-  // Style của background
+  // Style của Slide ảnh
   const bgImagestyle = {
     backgroundImage:`url(${imageSlide[currentState]})`,
     backgroundSize:'cover',
@@ -31,6 +32,7 @@ const BackgrounSlider = ({imageslide}) => {
   {
     setCurrentState(currentState);
   }
+  
   return (
       <div style={bgImagestyle} className='container'>
         <div className='carousel-boullt'>

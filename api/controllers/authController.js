@@ -5,7 +5,8 @@ import {createError} from "../utils/error.js"
 import jwt from "jsonwebtoken";
 import sendEmail from "../utils/sendMail.js";
 import crypto from "crypto"
-//Đăng ký 
+// Đăng ký 
+// BEGIN
 export const register =  async(req,res,next)=>{
   try{
       // Thực hiện mã hóa mật khẩu với bcrypt
@@ -23,7 +24,10 @@ export const register =  async(req,res,next)=>{
     next(err);
   }
 }
-// Đăng nhập
+// END
+
+// Đăng nhập 
+// BEGIN
 export const login =  async(req,res,next)=>{
   try{
     // Kiểm tra username có tồn tại trong database hay không 
@@ -48,8 +52,10 @@ export const login =  async(req,res,next)=>{
     next(err);
   }
 }
+//END
 
-// Đăng xuất
+// Đăng xuất 
+// BEGIN 
 export const logout = (req,res,next)=>{
   try{
     // Xóa access_token ra khỏi cookie
@@ -59,8 +65,10 @@ export const logout = (req,res,next)=>{
     next(err);
   }
 }
+//END
 
 // Yêu cầu reset password
+// BEGIN
 export const requestReset = async (req,res,next)=>{
   try{
     // Kiểm tra email có tồn tại trong database hay không
@@ -89,7 +97,10 @@ export const requestReset = async (req,res,next)=>{
     next(err);
   }
 }
+// END
+
 // Thực hiện reset password
+// BEGIN
 export const resetPassword = async(req, res,next)=>{
   try{
     // Kiểm tra token có tồn tại hay không
@@ -116,3 +127,4 @@ export const resetPassword = async(req, res,next)=>{
     next(err);
   }
 }
+// END

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 // Định nghĩa hàm useFetch: đầu vào là url, đầu ra là dữ liệu sẽ lấy từ api
+// BEGIN
 const useFetch = (url) => {
   // State "data" để lưu trữ dữ liệu từ API
   const [data, setData] = useState([]);
@@ -43,5 +44,6 @@ const useFetch = (url) => {
   // Trả về một đối tượng chứa dữ liệu, trạng thái loading, lỗi và hàm reFetch
   return { data, loading, error, reFetch };
 };
+// END
 
 export default useFetch;
