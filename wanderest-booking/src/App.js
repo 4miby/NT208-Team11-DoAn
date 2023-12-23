@@ -24,7 +24,7 @@ function App() {
             <Route path='/register' element={<Register/>}/>
             <Route path='/reset' element={<Reset/>}/>
             <Route path='/resetPassword' element = {<ResetPassword/>}/>
-            <Route path='/hotels/:id' element={<Hotel/>}/>
+            <Route path='/hotels/:slug' element={<Hotel/>}/>
             <Route path='/mybooking/:id' element={<MyBooking/>}/>
           </Routes>
         </BrowserRouter>

@@ -58,7 +58,7 @@ export const deleteHotel = async(req,res,next)=>{
 export const getHotel = async(req,res,next)=>{
   try{
     // Tìm khách sạn dựa trên ID
-    const hotel = await Hotel.findById(req.params.id)
+    const hotel = await Hotel.findOne({slug: req.params.slug})
     res.status(200).json(hotel);
   }
   catch(err){

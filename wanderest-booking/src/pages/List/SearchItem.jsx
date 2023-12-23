@@ -27,7 +27,7 @@ const SearchItem = ({item}) => {
         <div className='siDetailTexts'>
             <span className='siPrice'>VNĐ {currencyFormat(item.cheapestPrice)}</span>
             <span className='siTaxOp'>Đã bao gồm thuế</span>
-            <Link to={item._id}><button className='siCheckButton'>Xem Phòng</button></Link>
+            <Link to={item.slug}><button className='siCheckButton'>Xem Phòng</button></Link>
         </div>
       </div>
     </div>
