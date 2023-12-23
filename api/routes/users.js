@@ -18,10 +18,10 @@ router.put("/:id",verifyUser,updateUser);
 // DELETE
 router.delete("/:id",verifyUser, deleteUser);
 // GET
-router.get("/:id",verifyUser, getUser);
+router.get("/:username",verifyUser, getUser);
 // GETALL
 router.get("/",verifyAdmin, getAllUser);
 //GET RESERVATION
-router.get("/reservations/:id",verifyUser,getUserReservations);
+router.get("/reservations/:usename",verifyUser,getUserReservations);
 
 export default router;

@@ -88,8 +88,8 @@ const Navbar = () => {
       }
 
       {user && (<div className={`DropDownMenu ${isDrop ? 'active' :'inactive'}`}>
-      <DropDownItem text="Thông tin" img={userpng} path={`/infor/${user._id}`}></DropDownItem>
-      <DropDownItem text="Đặt chỗ của tôi" img={reserve} path={`/mybooking/${user._id}`}></DropDownItem>
+      <DropDownItem text="Thông tin" img={userpng} path={`/infor/${user.username}`}></DropDownItem>
+      <DropDownItem text="Đặt chỗ của tôi" img={reserve} path={`/mybooking/${user.username}`}></DropDownItem>
       <DropDownItem text="Về chúng tôi" img={question} path="/AboutUs"></DropDownItem>
       <div onClick={handleSignOut}>
         <DropDownItem text="Đăng xuất"  img={logout}></DropDownItem>

@@ -31,7 +31,7 @@ export const deleteUser = async(req,res,next)=>{
 // BEGIN
 export const getUser = async(req,res,next)=>{
   try{
-    const user = await User.findById(req.params.id) // Tìm người dùng dựa trên ID
+    const user = await User.findOne({username: req.params.username}) // Tìm người dùng dựa trên ID
     res.status(200).json(user); // Trả về thông tin người dùng
   }
   catch(err){
@@ -57,7 +57,7 @@ export const getAllUser = async(req,res,next)=>{
 // BEGIN
 export const getUserReservations = async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id); // Tìm người dùng dựa trên ID
+    const user = await User.findOne({username: req.params.username}); // Tìm người dùng dựa trên ID
     const list = await Promise.all(
       user.reservations.map((reservation) => {  // Tìm đặt chỗ dựa trên ID từ mảng reservations của người dùng
         return Reservation.findById(reservation);
