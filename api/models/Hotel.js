@@ -49,8 +49,15 @@ const HotelSchema = new mongoose.Schema({
   },
   slug: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   }
 });
-
+HotelSchema.pre('validate', function(next) {
+  if (this.name) {
+    this.slug = slugify(this.name, {
+      lower: true,
+      strict: true})
+  }
+})
 export default mongoose.model("Hotel", HotelSchema)
