@@ -13,13 +13,13 @@ import { AuthContext } from '../../context/AuthContext'
 import Reserve from './Reserve'
 const Hotel = () => {
   const {id} = useParams();
+  const navigate = useNavigate();
   const [slideNumber, setSlideNumber] = useState(0);
   const [openSlider, setOpenSlider] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const {data, loading, error} = useFetch(`/hotels/find/${id}`);
   const {user} = useContext(AuthContext);
   const [days, setDays] = useState()
-  const navigate = useNavigate();
 
   const {dates,options} = useContext(SearchContext);
   // Hàm đếm số ngày cách nhau

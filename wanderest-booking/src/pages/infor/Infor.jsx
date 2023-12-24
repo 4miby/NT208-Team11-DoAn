@@ -9,8 +9,7 @@ const Infor = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [file,setFile] = useState();
-  
-
+  console.log(id);
   const {data, loading, error} = useFetch(`/users/${id}`);
   const [user, setUser] = useState({});
   // Kiểm tra user đã có ảnh hay chưa
