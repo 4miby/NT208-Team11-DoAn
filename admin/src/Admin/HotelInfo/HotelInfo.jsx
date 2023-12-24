@@ -5,15 +5,19 @@ import Navbar from "../components/Navbar/navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState, useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
-import { useParams, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import toast from "react-hot-toast";
 const HotelInfo = () => {
   const navigate = useNavigate();
-  const {id} = useParams();
+  const location = useLocation();
+  const pathname = location.pathname;
+  const slug = pathname.split('/hotels/')[1];
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
-  const {data, loading, error} = useFetch(`/hotels/find/${id}`);
+  const {data, loading, error} = useFetch(`/hotels/find/${slug}`);
+  const id = data._id;
+  console.log(slug);
   
   const [img, setImg] = useState();
   useEffect(()=>{

@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import useFetch from '../../../hooks/useFetch';
 import './datatable.scss'
 import { DataGrid } from '@mui/x-data-grid';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Datatable = ({columns}) => {
   const location = useLocation();
+  const navigate = useNavigate();
   // Tách path để lấy giá trị
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState([]);
@@ -14,7 +15,21 @@ const Datatable = ({columns}) => {
   useEffect(() => {
     setList(data);
   },[data]);
-  // Xử lý khi xóa 
+
+  // Xử lý khi bấm view
+  const handleView = async (params)=>{
+    if(path=== "hotels"){
+      navigate(`/hotels/${params.row.slug}`)
+    }
+    else if(path === "users"){
+      navigate(`/users/${params.row.username}`)
+    }
+    else {
+      navigate(`/rooms/${params.row._id}`)
+    }
+  }
+
+  // Xử lý khi bấm delete
   const handleDelete = async (id) => {
     try {
         await axios.delete(`/${path}/${id}`);
@@ -22,6 +37,7 @@ const Datatable = ({columns}) => {
     } catch (err) {}
   };
 
+  
   const actionColumn = [
     {
       field: "action",
@@ -30,9 +46,11 @@ const Datatable = ({columns}) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to={`/${path}/${params.row._id}`} style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
+              <div 
+              className="viewButton"
+              onClick={()=>handleView(params)}
+              >View</div>
+            
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row._id)}

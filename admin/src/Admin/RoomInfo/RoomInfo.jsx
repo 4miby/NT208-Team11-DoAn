@@ -50,6 +50,7 @@ const RoomInfo = () => {
                   type="text"
                   id="title"
                   onChange={handleChange}
+                  placeholder={data.title}
                   />
               </div>
               <div className="formInput">
@@ -58,6 +59,7 @@ const RoomInfo = () => {
                   type="text"
                   id="desc"
                   onChange={handleChange}
+                  placeholder={data.desc}
                   />
               </div>
               <div className="formInput">
@@ -66,6 +68,7 @@ const RoomInfo = () => {
                   type="Number"
                   id="price"
                   onChange={handleChange}
+                  placeholder={data.price}
                   />
               </div>
               <div className="formInput">
@@ -74,6 +77,7 @@ const RoomInfo = () => {
                   type="number"
                   id="maxPeople"
                   onChange={handleChange}
+                  placeholder={data.maxPeople}
                   />
               </div>
               <div className="formInput">

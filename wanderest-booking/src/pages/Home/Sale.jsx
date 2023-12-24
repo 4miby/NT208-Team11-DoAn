@@ -25,9 +25,9 @@ const Sale = () => {
     room:1
   });
   const {dispatch} = useContext(SearchContext);
-  const handleClick = (id)=>{
+  const handleClick = (slug)=>{
     dispatch({type:"NEW_SEARCH",payload:{destination,dates,options}})
-    navigate(`/hotels/${id}`, {state:{destination, dates, options}})
+    navigate(`/hotels/${slug}`, {state:{destination, dates, options}})
   }
   return (
     <div className='sale-container'>
@@ -38,7 +38,7 @@ const Sale = () => {
       (<>{data.map(item=>(
             <div className='sale-room' key={item._id}
             onMouseOver={()=>setDestination(item.city)} 
-            onClick={()=>handleClick(item._id)}>
+            onClick={()=>handleClick(item.slug)}>
             <img alt="" src={item.photos[0]}></img>
             <div className='room-info'>
               <div className='roomTitleContainer'>
