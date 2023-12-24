@@ -6,6 +6,7 @@ export const createHotel = async(req, res, next)=>{
   // Tạo một đối tượng khách sạn mới từ dữ liệu trong request body
   const newHotel = new Hotel(req.body);  
   try{
+      
       // Lưu khách sạn mới vào cơ sở dữ liệu
       const savedHotel = await newHotel.save(); 
       res.status(200).json("Hotel has been created");  

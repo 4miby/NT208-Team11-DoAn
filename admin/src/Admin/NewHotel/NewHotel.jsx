@@ -8,6 +8,7 @@ import { hotelInputs } from "../../formsource";
 import useFetch from "../../hooks/useFetch"
 import {useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
+import slugigy from 'slugify'
 const NewHotel = () => {
   const navigate = useNavigate();
   const [files, setFiles] = useState("");
@@ -31,10 +32,13 @@ const NewHotel = () => {
           return url;
       })
       );
+      const slug = slugigy(info.name,'-');
+      console.log(slug)
       // Thêm mảng url vào dữ liệu sẽ gửi vào database
       const newHotel = {
         ...info,
-        photos:list
+        photos:list,
+        slug: slug
       };
       // Thực hiện việc post dữ liệu lên database
       await axios.post("/hotels", newHotel)
