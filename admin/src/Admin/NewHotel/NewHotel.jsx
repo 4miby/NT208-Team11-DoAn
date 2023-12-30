@@ -5,10 +5,9 @@ import Sidebar from "../components/Sidebar/sidebar";
 import { useState } from "react";
 import axios from "axios";
 import { hotelInputs } from "../../formsource";
-import useFetch from "../../hooks/useFetch"
 import {useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
-import slugigy from 'slugify'
+import slugify from 'slugify'
 const NewHotel = () => {
   const navigate = useNavigate();
   const [files, setFiles] = useState("");
@@ -32,9 +31,9 @@ const NewHotel = () => {
           return url;
       })
       );
-      const slug = slugigy(info.name,'-'); // Tạo slug từ tên khách sạn
+      const slug = slugify(info.name,'-'); // Tạo slug từ tên khách sạn
       console.log(slug)
-      // Thêm mảng url vào dữ liệu sẽ gửi vào database
+      // Thêm mảng url và slug vào dữ liệu sẽ gửi vào database
       const newHotel = {
         ...info,
         photos:list,
