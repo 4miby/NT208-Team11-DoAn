@@ -12,12 +12,12 @@ import { currencyFormat } from '../../utils/CurrencyFormat'
 import { AuthContext } from '../../context/AuthContext'
 import Reserve from './Reserve'
 const Hotel = () => {
-  const {id} = useParams();
+  const {slug} = useParams();
   const navigate = useNavigate();
   const [slideNumber, setSlideNumber] = useState(0);
   const [openSlider, setOpenSlider] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const {data, loading, error} = useFetch(`/hotels/find/${id}`);
+  const {data, loading, error} = useFetch(`/hotels/find/${slug}`);
   const {user} = useContext(AuthContext);
   const [days, setDays] = useState()
 
@@ -128,7 +128,7 @@ const Hotel = () => {
         </div>
       </div>)}
       {openModal && <Reserve setOpen={setOpenModal} 
-      hotelId={id} 
+      hotelId={slug} 
       hotelName={data.name} 
       hotelAddress={data.address}
       hotelCity={data.city}

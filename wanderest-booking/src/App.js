@@ -17,14 +17,14 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/infor/:id" element={<Infor/>}/>
+            <Route path="/infor/:username" element={<Infor/>}/>
             <Route path="/Aboutus" element={<AboutUs/>}/>
             <Route path='/hotels' element={<List/>}/>
             <Route path='/login'element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route path='/reset' element={<Reset/>}/>
             <Route path='/resetPassword' element = {<ResetPassword/>}/>
-            <Route path='/hotels/:id' element={<Hotel/>}/>
+            <Route path='/hotels/:slug' element={<Hotel/>}/>
             <Route path='/mybooking/:id' element={<MyBooking/>}/>
           </Routes>
         </BrowserRouter>

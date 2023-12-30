@@ -7,10 +7,10 @@ import useFetch from '../../hooks/useFetch'
 import axios from 'axios'
 const Infor = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { username } = useParams();
   const [file,setFile] = useState();
-  console.log(id);
-  const {data, loading, error} = useFetch(`/users/${id}`);
+  const {data, loading, error} = useFetch(`/users/${username}`);
+  const id = data._id;
   const [user, setUser] = useState({});
   // Kiểm tra user đã có ảnh hay chưa
   const [img,setImg] = useState();

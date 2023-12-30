@@ -31,7 +31,7 @@ export const deleteUser = async(req,res,next)=>{
 // BEGIN
 export const getUser = async(req,res,next)=>{
   try{
-    const user = await User.findOne({username: req.params.username}) // Tìm người dùng dựa trên ID
+    const user = await User.findOne({username: req.params.username}) // Tìm người dùng dựa trên username
     res.status(200).json(user); // Trả về thông tin người dùng
   }
   catch(err){
