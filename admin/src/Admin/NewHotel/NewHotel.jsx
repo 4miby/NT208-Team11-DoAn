@@ -32,7 +32,7 @@ const NewHotel = () => {
           return url;
       })
       );
-      const slug = slugigy(info.name,'-');
+      const slug = slugigy(info.name,'-'); // Tạo slug từ tên khách sạn
       console.log(slug)
       // Thêm mảng url vào dữ liệu sẽ gửi vào database
       const newHotel = {
